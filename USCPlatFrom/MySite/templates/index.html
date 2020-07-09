@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link href="../static/css/index.css" rel="stylesheet" type="text/css" media="all"/>
+	<title>咕咕咕</title>
+</head>
+<body>
+	<ul>		
+		<li><a href="/login/?from_page={{ request.get_full_path }}">主页</a></li>
+		<li><a href="/courses/?from_page={{ request.get_full_path }}">课程</a></li>
+		<li><a href="/logout/?from_page={{ request.get_full_path }}">退出</a></li>
+	</ul>
+	<footer>Copyright &copy; 2020.武汉大学 All rights reserved.<a target="_blank" href="http://www.whu.edu.cn/"> @ Wuhan University</a>
+	</footer>
+</body>
+</html>

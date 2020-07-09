@@ -16,9 +16,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from MySite import views as My_views
+from Spider import views as Spider_views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    
-    path('',My_views.Login,name = 'Login'),
+    path('admin/', admin.site.urls),    
+    path('',My_views.index,name = 'home'),
+    path('login/',My_views.Login,name = 'login'),
+    path('register/',My_views.register,name = 'register'),
+    path('courses/',My_views.courses,name = 'courses'),
+    path('course_detail/',My_views.course_detail,name = 'course_detail'),
+    path('Spider/',Spider_views.index,name = 'Spider'),
 ]

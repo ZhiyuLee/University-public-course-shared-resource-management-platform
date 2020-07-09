@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'MySite',
+    'Spider',
 ]
 
 MIDDLEWARE = [
@@ -118,4 +119,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+STATIC_ROOT = os.path.join(os.path.dirname(__file__),'static')
 STATIC_URL = '/static/'
+
+
+STATICFILES_DIRS = (
+    ('css',os.path.join(STATIC_ROOT,'css').replace('\\','/') ),  
+    ('js',os.path.join(STATIC_ROOT,'js').replace('\\','/') ), 
+    ('images',os.path.join(STATIC_ROOT,'images').replace('\\','/') ), 
+    ('upload',os.path.join(STATIC_ROOT,'upload').replace('\\','/') ), 
+)
