@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+</head>
+<body>
+<ul>
+<h1>课程列表:</h1>
+课程号 课程名 课程类别 授课教师 授课学院 课程学分 学时安排
+{% for course in all_course %}
+    <li>{{ course }}</li>
+{% empty %}
+    <li>抱歉，列表为空</li>
+{% endfor %}
+</ul>
+<p>
+    <a href="/logout/">登出</a>
+</p>
+</body>
+</html>

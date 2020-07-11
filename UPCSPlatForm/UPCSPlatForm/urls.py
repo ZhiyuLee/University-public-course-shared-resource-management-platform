@@ -14,10 +14,10 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
-#Begin
-#auth:zbk
-#create date:7.10
-#description:
+# Begin
+# auth:zbk
+# create date:7.10
+# description:
 
 from django.contrib import admin
 from django.urls import path
@@ -26,11 +26,11 @@ from MySite import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('index/', views.index,name='home'),
-    path('login/', views.login,name='login'),
-    path('register/', views.register,name='register'),
-    path('logout/', views.logout,name='logout'),
+    path('index/', views.index, name='home'),
+    path('login/', views.login, name='login'),
+    path('register/', views.register, name='register'),
+    path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls'))
 ]
 
-#End
+# End

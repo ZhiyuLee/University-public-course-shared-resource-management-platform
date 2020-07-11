@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-#Begin
-#auth:zbk
-#create date:7.10
-#description:
+# Begin
+# auth:zbk
+# create date:7.10
+# description:
+
 
 class User(models.Model):
 
@@ -23,4 +24,4 @@ class User(models.Model):
         verbose_name = "用户"
         verbose_name_plural = "用户"
 
-#End
+# End
