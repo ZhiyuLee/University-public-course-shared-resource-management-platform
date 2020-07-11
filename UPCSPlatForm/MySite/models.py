@@ -2,10 +2,11 @@ from django.db import models
 
 # Create your models here.
 
-#Begin
-#auth:zbk
-#create date:7.10
-#description:
+# Begin
+# auth:zbk
+# create date:7.10
+# description:
+
 
 class User(models.Model):
 
@@ -24,6 +25,7 @@ class User(models.Model):
         verbose_name = "用户"
         verbose_name_plural = "用户"
 
+
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)
     user = models.OneToOneField('User', on_delete=models.CASCADE)
@@ -40,3 +42,4 @@ class ConfirmString(models.Model):
 
 
 #End
+

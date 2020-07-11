@@ -1,18 +1,22 @@
+
 from django.shortcuts import render,redirect
 from.import models,forms
 import datetime
 from django.conf import settings
+import CoursePart.views as course_views
+
 
 # Create your views here.
 
-#Begin
-#auth:zbk
-#create date:7.10
-#description:
+# Begin
+# auth:zbk
+# create date:7.10
+# description:
+
 
 def index(request):
-    pass
-    return render(request,'index.html')
+    return course_views.index(request)
+
 
 def login(request):
     if request.method == "POST":
@@ -24,8 +28,8 @@ def login(request):
             try:
                 user = models.User.objects.get(UserID=UserID)
             except:
-                message='用户不存在！'
-                return render(request,'login/login.html',locals())
+                message = '用户不存在！'
+                return render(request, 'login/login.html', locals())
             if user.Password == Password:
                 return redirect('/index/')
             else:
@@ -37,7 +41,8 @@ def login(request):
     login_form = forms.UserForm()
     return render(request, 'login/login.html', locals())
 
-def register (request):
+
+def register(request):
     if request.method == 'POST':
         register_form = forms.RegisterForm(request.POST)
         message = "请检查填写的内容！"
@@ -108,4 +113,4 @@ def logout(request):
     pass
     return redirect("/login/")
 
-#End
+# End
