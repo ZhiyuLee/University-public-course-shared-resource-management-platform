@@ -1,0 +1,84 @@
+body {
+  		background: url(../images/bg.jpg) no-repeat top center;
+		background-size: cover;
+		background-attachment: fixed;
+		width: 100%;
+		height: 100%;
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+
+}
+.form-login {
+  width: 100%;
+  max-width: 240px;
+  padding: 15px;
+  margin: 0 auto;
+
+}
+.form-login{
+  margin-top:80px;
+  margin-right:-80px;
+  font-weight: 400;
+}
+#head {
+	height: 60px;
+	width: 100%;
+	background-color: #66CCCC;
+	text-align: center;
+	position: relative;
+    font-size: 36px;
+    color: white;
+}
+#userID{
+    width: 80%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin:0 auto;
+}
+#password{
+    width: 80%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin:0 auto;
+}
+#captcha{
+    width: 100%;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    margin-top:10px;
+    margin-left:30px;
+}
+#btn {
+    background-color:white;
+    border:2px solid greenyellow;
+    color: black;
+    width:80%;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    cursor: pointer;
+    margin-top:10px;
+    margin-left:30px;
+}
+#but:hover {
+    background-color: darkseagreen;
+}
+#but:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+
+#wrap {
+    height: 369px;
+    width: 300px;
+    background-image: url(../images/white.jpeg);
+    background-position: center center;
+    position: relative;
+}

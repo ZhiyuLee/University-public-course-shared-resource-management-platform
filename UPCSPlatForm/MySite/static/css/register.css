@@ -1,5 +1,9 @@
 body {
-  height: 100%;
+        background:url(../images/bg.jpg)  no-repeat center;
+        background-size:cover;
+        background-attachment:fixed;
+        background-color:#CCCCCC;
+
 }
 .form-register {
   width: 100%;
