@@ -7,5 +7,17 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:C:\Users\张博凯\Desktop\新建文件夹\University-public-course-shared-resource-management-platform\UPCSPlatForm\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="db.sqlite3.BASE" uuid="665c28bb-185a-4ffd-8150-88010d49709e">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Git\Projects\University-public-course-shared-resource-management-platform\UPCSPlatForm\db.sqlite3.BASE.sqlite3</jdbc-url>
+    </data-source>
+    <data-source source="LOCAL" name="db [2]" uuid="6ac7824c-4b90-4c93-913a-40baa5b728ad">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Git\Projects\University-public-course-shared-resource-management-platform\UPCSPlatForm\db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>
