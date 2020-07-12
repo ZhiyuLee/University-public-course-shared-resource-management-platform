@@ -6,6 +6,8 @@ from django.conf import settings
 import CoursePart.views as course_views
 
 
+
+
 # Create your views here.
 
 # Begin
