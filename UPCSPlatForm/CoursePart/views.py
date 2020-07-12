@@ -1,14 +1,11 @@
-from django.shortcuts import render
-from CoursePart import models, tests
-import decimal
-
-# Begin
 # auth:gz
 # create date:7.10
 # description:课程部分操作
 
+from django.shortcuts import render
+from CoursePart import models, tests
+import decimal
 
-# Create your views here.
 def index(request):
     # tests.testCoursePart.test_add_course(self=None)
     all_course = get_all_courses()

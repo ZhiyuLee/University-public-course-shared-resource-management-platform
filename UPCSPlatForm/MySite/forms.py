@@ -1,10 +1,10 @@
-from django import forms
-from captcha.fields import CaptchaField
-
-# Begin
 # auth:zbk
 # create date:7.10
 # description:
+
+from django import forms
+from captcha.fields import CaptchaField
+
 
 class UserForm(forms.Form):
     UserID = forms.CharField(label="用户名", max_length=128, widget=forms.TextInput(attrs={'class': 'form-control', 'placeholder': "UserID", 'autofocus': ''}))
@@ -20,4 +20,5 @@ class RegisterForm(forms.Form):
     Email = forms.EmailField(label="邮箱地址", widget=forms.EmailInput(attrs={'class': 'form-control'}))
     captcha = CaptchaField(label='验证码')
 
-# End
+class EvaluationForm(forms.Form):
+    pass

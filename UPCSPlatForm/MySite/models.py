@@ -1,11 +1,8 @@
-from django.db import models
-
-# Create your models here.
-
-# Begin
-# auth:zbk
+# auth:zbk,lby
 # create date:7.10
 # description:
+
+from django.db import models
 
 
 class User(models.Model):
@@ -25,21 +22,17 @@ class User(models.Model):
         verbose_name = "用户"
         verbose_name_plural = "用户"
 
-
-class ConfirmString(models.Model):
-    code = models.CharField(max_length=256)
-    user = models.OneToOneField('User', on_delete=models.CASCADE)
-    JoinDate = models.DateTimeField(auto_now_add=True)
+class Evaluation(models.Model):    
+    EvaluationID = models.CharField(max_length=128,unique=True)
+    UserID = models.CharField(max_length=128)
+    Description = models.CharField(max_length=256)
+    Date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return self.user.name + ":   " + self.code
+        return self.EvaluationID
 
     class Meta:
-
-        ordering = ["-JoinDate"]
-        verbose_name = "确认码"
-        verbose_name_plural = "确认码"
-
-
-#End
+        ordering = ["EvaluationID","Date"]
+        verbose_name = "用户评价"
+        verbose_name_plural = "用户评价"
 
