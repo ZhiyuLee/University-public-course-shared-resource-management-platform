@@ -22,6 +22,7 @@ class User(models.Model):
         verbose_name = "用户"
         verbose_name_plural = "用户"
 
+<<<<<<< HEAD
 class Evaluation(models.Model):    
     EvaluationID = models.CharField(max_length=128,unique=True)
     UserID = models.CharField(max_length=128)
@@ -35,4 +36,7 @@ class Evaluation(models.Model):
         ordering = ["EvaluationID","Date"]
         verbose_name = "用户评价"
         verbose_name_plural = "用户评价"
+=======
+#End
+>>>>>>> 8dabe4a308aac773cf951a9e225a19278278c71c
 

@@ -11,6 +11,19 @@ from django.conf import settings
 import CoursePart.views as course_views
 
 
+<<<<<<< HEAD
+=======
+
+
+# Create your views here.
+
+# Begin
+# auth:zbk
+# create date:7.10
+# description:
+
+
+>>>>>>> 8dabe4a308aac773cf951a9e225a19278278c71c
 def index(request):
     return course_views.index(request)
 

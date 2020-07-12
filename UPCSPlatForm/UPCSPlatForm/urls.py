@@ -14,5 +14,10 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls')),
+<<<<<<< HEAD
+=======
+
+]
+>>>>>>> 8dabe4a308aac773cf951a9e225a19278278c71c
 
 ]
