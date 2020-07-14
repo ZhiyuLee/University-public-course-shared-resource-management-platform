@@ -1,9 +1,3 @@
-# auth:zbk，lby
-# create date:7.10
-# description:
-
-
-
 from django.shortcuts import render,redirect
 from.import models,forms
 import datetime
@@ -11,19 +5,14 @@ from django.conf import settings
 import CoursePart.views as course_views
 
 
-<<<<<<< HEAD
-=======
-
-
 # Create your views here.
 
 # Begin
-# auth:zbk
+# auth:zbk, lby
 # create date:7.10
 # description:
 
 
->>>>>>> 8dabe4a308aac773cf951a9e225a19278278c71c
 def index(request):
     return course_views.index(request)
 
@@ -95,4 +84,4 @@ def logout(request):
     pass
     return redirect("/login/")
 
-
+# End
