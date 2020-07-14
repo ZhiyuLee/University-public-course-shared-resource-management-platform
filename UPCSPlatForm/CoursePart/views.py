@@ -5,37 +5,56 @@
 from django.shortcuts import render
 from CoursePart import models, tests
 import decimal
+from django.shortcuts import render, redirect
+
 
 def index(request):
     # tests.testCoursePart.test_add_course(self=None)
-    all_course = get_all_courses()
-    return render(request, 'index.html', {'all_course': all_course})
+    flag_1 = flag_2 = flag_3 = True
+    courses = get_all_courses()
+    if request.GET.get('course_name') != "" and \
+            request.GET.get('course_name') is not None:
+        courses = web_query_by_name(courses, request)
+        flag_1 = False
+    if request.GET.get('course_id') != "" and \
+            request.GET.get('course_id') is not None:
+        flag_2 = False
+        courses = web_query_by_id(courses, request)
+    if request.GET.get('teacher_name') != "" and \
+            request.GET.get('teacher_name') is not None:
+        courses = web_query_by_teacher(courses, request)
+        flag_3 = False
+    if flag_1 and flag_2 and flag_3:
+        # courses = get_all_courses()
+        pass
+    # all_course = get_all_courses()
+    return render(request, 'index.html', {'courses': courses})
 
 
 def get_all_courses():
     return models.Course.objects.all()
 
 
-def query_by_id(course_id):
+def query_by_id(courses, course_id):
     if course_id:
         try:
-            course = models.Course.objects.get(ID=course_id)
+            course = courses.filter(ID=course_id)
         except:
             return None
         return course
 
 
-def query_by_keyWord(keyWord):
-    all_courses = get_all_courses()
-    return all_courses.filter(name__contains=keyWord)
+def query_by_keyWord(courses, keyWord):
+    # all_courses = get_all_courses()
+    return courses.filter(name__contains=keyWord)
 
 
-def query_by_type(course_type):
-    return get_all_courses().filter(type=course_type)
+def query_by_type(courses, course_type):
+    return courses.filter(type=course_type)
 
 
-def query_by_teacher(course_teacher):
-    return get_all_courses().filter(teacherName__contains=course_teacher)
+def query_by_teacher(courses, course_teacher):
+    return courses.filter(teacherName__contains=course_teacher)
 
 
 def delete_by_id(course_id):
@@ -57,5 +76,40 @@ def add_course(course_id, course_name,
     new_course.time = course_time
     new_course.type = course_type
     new_course.save()
+
+
+def default_url(request):
+    pass
+    return redirect("/login/")
+
+
+def web_query_by_name(courses, request):
+    if request.method == "GET":
+        course_name = request.GET.get('course_name')
+        try:
+            courses = query_by_keyWord(courses, course_name)
+        except:
+            return render(request, 'index.html')
+        return courses
+
+
+def web_query_by_id(courses, request):
+    if request.method == "GET":
+        course_id = request.GET.get('course_id')
+        try:
+            courses = query_by_id(courses, course_id)
+        except:
+            return render(request, 'index.html')
+        return courses
+
+
+def web_query_by_teacher(courses, request):
+    if request.method == "GET":
+        teacher_name = request.GET.get('teacher_name')
+        try:
+            courses = query_by_teacher(courses, teacher_name)
+        except:
+            return render(request, 'index.html')
+        return courses
 
 # End
