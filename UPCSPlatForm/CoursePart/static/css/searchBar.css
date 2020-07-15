@@ -1,17 +1,11 @@
 * {
             box-sizing: border-box;
-        }
+}
 
-        body {
-            margin: 0 auto;
-            padding: 0 ;
-            /*background: #494A5F;*/
-            font-weight: 500;
-            font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
-        }
+
 
         #container {
-            width: 900px;
+            width: 1000px;
             height: 820px;
             margin: 0 auto;
         }
@@ -19,7 +13,7 @@
 
         form {
             position: relative;
-            width: 300px;
+            width: 250px;
             margin: 0 auto;
         }
 
@@ -176,7 +170,7 @@
             height: 20px;
         }
         .bar7 input {
-            width: 250px;
+            width: 200px;
             border-radius: 42px;
             border: 2px solid #324B4E;
             background: #F9F0DA;
@@ -184,7 +178,7 @@
             float: right;
         }
         .bar7 input:focus {
-            width: 300px;
+            width: 250px;
         }
         .bar7 button {
             background: none;
