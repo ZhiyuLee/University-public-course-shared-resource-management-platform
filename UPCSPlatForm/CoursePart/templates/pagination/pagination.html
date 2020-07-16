@@ -1,0 +1,31 @@
+{% if is_paginated %}
+{% load i18n %}
+
+    <div class="demo">
+        <ul class="pagination pagination_type1 pagination_type3">
+            {% if page_obj.has_previous %}
+            <li class="pagination__item">
+                <a href="?page{{ page_suffix }}={{ page_obj.previous_page_number }}{{ getvars }}"  class="pagination__number">
+                    ←<span class="pagination__control pagination__control_prev">prev</span></a></li>
+            {% endif %}
+            {% for page in pages %}
+                {% if page %}
+                    {% ifequal page page_obj.number %}
+                    <li class="pagination__item"><a href="#" class="pagination__number pagination__number_active">{{ page }}</a></li>
+                    {% else %}
+                    <li class="pagination__item">
+                        <a href="?page{{ page_suffix }}={{ page }}{{ getvars }}" class="pagination__number">{{ page }}</a></li>
+                    {% endifequal %}
+                {% else %}
+                    <li><a href="#">...</a></li>
+                {% endif %}
+            {% endfor %}
+            {% if page_obj.has_next %}
+                <li class="pagination__item">
+                    <a href="?page{{ page_suffix }}={{ page_obj.next_page_number }}{{ getvars }}" class="pagination__number">
+                        <span class="pagination__control pagination__control_next">next</span>→</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+{% endif %}
