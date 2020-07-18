@@ -24,7 +24,7 @@
   line-height: 1;
   text-decoration: none;
   display: inline-block;
-  color: var(--paginationPageTextColor);
+  color: var(--paginationPageTextColor, inherit);
 }
 
 .pagination__number:hover{
@@ -32,7 +32,7 @@
 }
 
 .pagination__number_active{
-  font-weight: 700;
+  font-weight: var(--paginationPageFontWeight, 700);
 }
 
 .pagination__control_prev{
@@ -148,13 +148,12 @@
 }
 
 body{
-  font-family: "Microsoft YaHei","宋体","Segoe UI", "Lucida Grande", Helvetica, Arial,sans-serif, FreeSans, Arimo;
-  font-size: 1.2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Open Sans", "Ubuntu", "Fira Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.6rem;
   color: #222;
   background-color: #f0f0f0;
-  margin: 30px auto;
-  -webkit-overflow-scrolling: touch;
-  font-weight: 500;
+  margin: 0;
+  -webkit-overflow-scrolling: touch;   
 }
 
 a{
@@ -207,7 +206,7 @@ a:hover, a:focus{
 }
 
 .demo{
-  margin-top: 20px;
+  margin-top: 5rem;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;

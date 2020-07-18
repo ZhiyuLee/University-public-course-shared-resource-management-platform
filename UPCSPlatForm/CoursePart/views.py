@@ -39,6 +39,7 @@ def get_all_courses():
     return models.Course.objects.all()
 
 
+# 返回query set 要用first()取第一个才是结果
 def query_by_id(courses, course_id):
     if course_id:
         try:

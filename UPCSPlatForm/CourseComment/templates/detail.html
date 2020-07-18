@@ -1,0 +1,138 @@
+{% load static %}
+{% load pagination_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>{{course.name}}详情页</title>
+<meta name="keywords" content="课程详细页" />
+<meta name="description" content="这里展示课程详细信息和相关评价" />
+
+<link href="{% static 'css/detail.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+
+<script language="javascript" type="text/javascript">
+function clearText(field)
+{
+    if (field.defaultValue == field.value) field.value = '';
+    else if (field.value == '') field.value = field.defaultValue;
+}
+</script>
+</head>
+<body>
+
+<div id="templatemo_site_title_bar_wrapper">
+	<div id="templatemo_site_title_bar">
+	    <div id="site_title">
+            <h1><a>{{course.name}}详情页
+                <span>包含课程详细信息和相关评价</span>
+            </a></h1>
+        </div>
+    </div>   
+</div>
+
+<div id="templatemo_menu_wrapper">
+	<div id="templatemo_menu">
+	    <ul>
+            <li><a href="" class="current fast"><span></span>当前页</a></li>
+            <li><a href="/index/"><span></span>课程列表</a></li>
+        </ul>
+    </div>
+</div> 
+
+<div id="templatemo_content_wrapper_outer">
+
+	<div id="templatemo_content_wrapper_inner">
+    
+    	<div id="templatemo_content_wrapper">
+        	
+            <div id="templatemo_content">
+            	<div class="content_bottom"></div>
+            	
+                <div id="main_column">
+                
+                    <div class="post_box" >
+                        
+                        <h2><a>{{course.name}}</a></h2>
+                        
+						<div class="post_info">
+                        
+                            <div class="post_date">
+                                课程号:{{course.ID}}
+							</div>
+                            
+                            <div class="post_author">
+                                课程类别:{{course.type}}
+                            </div>
+                            
+                            <div class="post_comment">
+                                授课教师:{{course.teacherName}}
+                            </div>
+							
+							<div class="post_comment">
+                                授课学院:{{course.college}}
+                            </div>
+                            
+							<div class="post_date">
+                                课程学分:{{course.credit}}
+							</div>
+							
+							<div class="post_author">
+                                学时安排:{{course.time}}
+                            </div>
+                                                        
+                        </div>
+
+                        <form action="/detail/" method="post">
+                            {% csrf_token %}
+						    <div class="group">
+                                {{ commentForm.thisComment }}
+							    <span class="highlight"></span><span class="bar"></span>
+							    <label>评论</label>
+						    </div>
+                        
+						    <div class="btn-box">
+							    <button type="submit" class="btn btn-submit">提交</button>
+						    </div>
+                        </form>
+						
+                    </div> <!-- end of a post -->
+                    
+                        
+				</div> <!-- end of main column -->        
+				
+                <div id="side_column">
+                
+                <div class="side_column_section" >
+                
+                   	<h3>课程评价</h3>
+
+                    {% autopaginate comments 4 as thisPageComments %}
+                    {% for comment in thisPageComments %}
+                    <div class="recent_post">
+                    	<h4><a>{{ comment.Comment_User_ID.UserName }}:</a></h4>
+                    	{{ comment.Comment_text }}
+                        <div style="text-align:right;">{{ comment.Time }}</div>
+                    </div>
+                    
+                    {% endfor %}
+                    
+                </div>
+                {% paginate %}
+                                
+                </div> <!-- end of side column -->
+            
+            	<div class="cleaner"></div>
+            </div>
+        
+        	<div class="cleaner"></div>
+        </div>
+        
+        <div class="cleaner"></div>        
+    </div>
+
+</div>
+
+<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>  </body> 
+</html>

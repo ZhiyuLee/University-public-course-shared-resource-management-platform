@@ -106,6 +106,7 @@ def logout(request):
     request.session.flush()
     return redirect("/login/")
 
+<<<<<<< HEAD
 def make_confirm_string(user):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.UserID, now)
@@ -154,5 +155,16 @@ def user_confirm(request):
         confirm.delete()
         message = '感谢确认，请使用账户登录！'
         return render(request, 'login/confirm.html', locals())
+=======
+
+def query_by_id(user_id):
+    if user_id:
+        try:
+            # all_users = models.User.objects.all()
+            user = models.User.objects.get(UserID=user_id)
+        except:
+            return None
+        return user
+>>>>>>> c4b04f220a99f43730d6104c418b77493ac1d418
 
 # End
