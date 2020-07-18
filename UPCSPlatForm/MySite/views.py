@@ -84,4 +84,14 @@ def logout(request):
     pass
     return redirect("/login/")
 
+
+def query_by_id(user_id):
+    if user_id:
+        try:
+            # all_users = models.User.objects.all()
+            user = models.User.objects.get(UserID=user_id)
+        except:
+            return None
+        return user
+
 # End

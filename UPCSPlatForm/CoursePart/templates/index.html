@@ -68,6 +68,12 @@
             thisElement.className = "pagination__number pagination__number_active";
         }
 
+        function gotoDetail(id) {
+            let detail = document.getElementById("detail_id");
+            detail.value = id;
+            let detail_btn = document.getElementById("detail_btn");
+            detail_btn.click();
+        }
     </script>
 
 </head>
@@ -102,6 +108,11 @@
         <input type="text" id="hidden_teacher" name="course_teacher" hidden>
         <input type="text" id="hidden_name" name="course_name" hidden>
         <button type="submit" id="hidden_btn" hidden></button>
+    </form>
+
+    <form action="/detail/" method="get">
+        <input type="text" id="detail_id" name="detail_id" hidden>
+        <button type="submit" id="detail_btn" hidden></button>
     </form>
 
     <ul id="nav" style="float: left">
@@ -146,7 +157,7 @@
         </thead>
         {% autopaginate courses 10 as thisPageCourses %}
         {% for course in thisPageCourses %}
-        <tr onclick="location.href = '/course/id={{ course.ID }}'">
+        <tr onclick="gotoDetail({{ course.ID }})">
             <td>{{ course.ID }}</td>
             <td>{{ course.name }}</td>
             <td>{{ course.type }}</td>

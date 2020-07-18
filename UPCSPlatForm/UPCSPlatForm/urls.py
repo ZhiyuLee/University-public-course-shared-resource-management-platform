@@ -7,6 +7,7 @@ from django.urls import path
 from django.urls import include
 from MySite import views
 from CoursePart import views as course_views
+from CourseComment import views as comment_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -16,7 +17,7 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls')),
-
+    path('detail/', comment_views.detail, name='detail'),
 
 ]
 
