@@ -37,3 +37,19 @@ class Evaluation(models.Model):
         verbose_name = "用户评价"
         verbose_name_plural = "用户评价"
 
+class ConfirmString(models.Model):
+    code = models.CharField(max_length=256)
+    user = models.OneToOneField('User', on_delete=models.CASCADE)
+    JoinDate = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.UserName + ":   " + self.code
+
+    class Meta:
+
+        ordering = ["-JoinDate"]
+        verbose_name = "确认码"
+        verbose_name_plural = "确认码"
+
+#End
+
