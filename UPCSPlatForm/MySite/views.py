@@ -1,7 +1,7 @@
 import hashlib
 
-from django.shortcuts import render,redirect
-from.import models,forms
+from django.shortcuts import render, redirect
+from . import models, forms
 import datetime
 from django.conf import settings
 import CoursePart.views as course_views
@@ -14,11 +14,12 @@ import CoursePart.views as course_views
 # create date:7.10
 # description:
 
-def hash_code(s, salt='mysite'):# 加点盐
+def hash_code(s, salt='mysite'):  # 加点盐
     h = hashlib.sha256()
     s += salt
     h.update(s.encode())  # update方法只接收bytes类型
     return h.hexdigest()
+
 
 def index(request):
     return course_views.index(request)
@@ -36,10 +37,10 @@ def login(request):
             Password = login_form.cleaned_data.get('Password')
 
             try:
-                user = models.User.objects.get(UserID=UserID,)
+                user = models.User.objects.get(UserID=UserID, )
             except:
-                message='用户不存在！'
-                return render(request,'login/login.html',locals())
+                message = '用户不存在！'
+                return render(request, 'login/login.html', locals())
 
             if not user.has_confirmed:
                 message = '该用户还未经过邮件确认！'
@@ -57,6 +58,7 @@ def login(request):
             return render(request, 'login/login.html', locals())
     login_form = forms.UserForm()
     return render(request, 'login/login.html', locals())
+
 
 def register(request):
     if request.method == 'POST':
@@ -99,6 +101,7 @@ def register(request):
     register_form = forms.RegisterForm()
     return render(request, 'login/register.html', locals())
 
+
 def logout(request):
     if not request.session.get('is_login', None):
         # 如果本来就未登录，也就没有登出一说
@@ -106,14 +109,15 @@ def logout(request):
     request.session.flush()
     return redirect("/login/")
 
+
 def make_confirm_string(user):
     now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.UserID, now)
-    models.ConfirmString.objects.create(code=code, user=user,)
+    models.ConfirmString.objects.create(code=code, user=user, )
     return code
 
-def send_email(email, code):
 
+def send_email(email, code):
     from django.core.mail import EmailMultiAlternatives
 
     subject = '来自不咕组的注册确认邮件'
@@ -131,6 +135,7 @@ def send_email(email, code):
     msg = EmailMultiAlternatives(subject, text_content, settings.EMAIL_HOST_USER, [email])
     msg.attach_alternative(html_content, "text/html")
     msg.send()
+
 
 def user_confirm(request):
     code = request.GET.get('code', None)
@@ -155,6 +160,7 @@ def user_confirm(request):
         message = '感谢确认，请使用账户登录！'
         return render(request, 'login/confirm.html', locals())
 
+
 def query_by_id(user_id):
     if user_id:
         try:
@@ -163,6 +169,5 @@ def query_by_id(user_id):
         except:
             return None
         return user
-
 
 # End

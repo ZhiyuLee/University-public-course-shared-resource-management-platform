@@ -6,8 +6,7 @@ from django.db import models
 
 
 class User(models.Model):
-
-    UserID = models.CharField(max_length=128,unique=True)
+    UserID = models.CharField(max_length=128, unique=True)
     UserName = models.CharField(max_length=128)
     Password = models.CharField(max_length=256)
     Email = models.EmailField(unique=True)
@@ -23,8 +22,8 @@ class User(models.Model):
         verbose_name_plural = "用户"
 
 
-class Evaluation(models.Model):    
-    EvaluationID = models.CharField(max_length=128,unique=True)
+class Evaluation(models.Model):
+    EvaluationID = models.CharField(max_length=128, unique=True)
     UserID = models.CharField(max_length=128)
     Description = models.CharField(max_length=256)
     Date = models.DateTimeField(auto_now_add=True)
@@ -33,9 +32,10 @@ class Evaluation(models.Model):
         return self.EvaluationID
 
     class Meta:
-        ordering = ["EvaluationID","Date"]
+        ordering = ["EvaluationID", "Date"]
         verbose_name = "用户评价"
         verbose_name_plural = "用户评价"
+
 
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)
@@ -46,10 +46,8 @@ class ConfirmString(models.Model):
         return self.user.UserName + ":   " + self.code
 
     class Meta:
-
         ordering = ["-JoinDate"]
         verbose_name = "确认码"
         verbose_name_plural = "确认码"
 
-#End
-
+# End
