@@ -63,7 +63,8 @@ def query_by_teacher(courses, course_teacher):
 
 
 def delete_by_id(course_id):
-    course = query_by_id(course_id)
+    all_courses = get_all_courses()
+    course = query_by_id(all_courses, course_id)
     models.Course.delete(course)
 
 

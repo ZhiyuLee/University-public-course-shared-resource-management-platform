@@ -19,5 +19,13 @@
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
       <jdbc-url>jdbc:sqlite:D:\Git\Projects\University-public-course-shared-resource-management-platform\UPCSPlatForm\db.sqlite3</jdbc-url>
     </data-source>
+    <data-source source="LOCAL" name="Django default" uuid="ff724e27-3f5b-4db8-9050-3f112c521dc5">
+      <driver-ref>sqlite.xerial</driver-ref>
+      <synchronize>true</synchronize>
+      <imported>true</imported>
+      <remarks>$PROJECT_DIR$/UPCSPlatForm/settings.py</remarks>
+      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
+      <jdbc-url>jdbc:sqlite:D:\Git\Projects\University-public-course-shared-resource-management-platform\UPCSPlatForm\db.sqlite3</jdbc-url>
+    </data-source>
   </component>
 </project>

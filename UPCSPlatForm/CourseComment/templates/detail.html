@@ -112,7 +112,7 @@ function clearText(field)
                     {% for comment in thisPageComments %}
                     <div class="recent_post">
                     	<h4><a>{{ comment.Comment_User_ID.UserName }}:</a></h4>
-                    	{{ comment.Comment_text }}
+                    	<div style="word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ comment.Comment_text }}</div>
                         <div style="text-align:right;">{{ comment.Time }}</div>
                     </div>
                     

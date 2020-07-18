@@ -20,7 +20,8 @@ def makeComment(request, course_id):
     commentForm = forms.CommentForm(request.POST)
     if commentForm.is_valid():
         comment = commentForm.cleaned_data.get('thisComment')  # 读取表单返回的值，返回类型为字典dict型
-        user = user_views.query_by_id('123')
+        user_id = request.session.get('user_id')
+        user = user_views.query_by_id(user_id)
         course = thisPageCourse
         newComment = models.Comment()
         newComment.Comment_text = comment
@@ -80,6 +81,8 @@ def detail(request):
                                                'commentForm': commentForm,
                                                'comments':comments})
     elif request.method == 'POST':
+        if thisPageCourse is None:
+            return redirect('/index/')
         ID = thisPageCourse.ID
         return makeComment(request, ID)
     elif request.method == "GET" and \
