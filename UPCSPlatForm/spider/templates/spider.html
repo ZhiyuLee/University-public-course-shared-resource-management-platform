@@ -1,0 +1,21 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    </head>
+    <body>            
+        <h1 class="text-center" >准备爬取教务系统，请手动登录得到cookies</h1>
+        <form action="/spider/" method="post">
+        {% csrf_token %}
+            <div>
+                {{ cookies_form.Cookies.label_tag }}
+                {{ cookies_form.Cookies}}
+            </div>
+            <div>
+                <button type="submit" class="btn" id="btn">爬取</button>
+            </div>
+        </form>
+    </body>
+</html>

@@ -16,13 +16,12 @@ body {
   max-width: 240px;
   padding: 15px;
   margin: 0 auto;
-
-}
-.form-login{
   margin-top:80px;
   margin-right:-80px;
   font-weight: 400;
+
 }
+
 #head {
 	height: 60px;
 	width: 100%;

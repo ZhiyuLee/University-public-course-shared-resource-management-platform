@@ -8,6 +8,7 @@ from django.urls import include
 from MySite import views
 from CoursePart import views as course_views
 from CourseComment import views as comment_views
+from spider import views as spider_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -17,15 +18,9 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('logout/', views.logout, name='logout'),
     path('captcha/', include('captcha.urls')),
-
     path('confirm/', views.user_confirm),
-
-
-    path('confirm/', views.user_confirm),
-
-
     path('detail/', comment_views.detail, name='detail'),
-
+    path('spider/', spider_views.index,name = 'spider'),
 
 ]
 
