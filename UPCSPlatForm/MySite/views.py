@@ -5,6 +5,7 @@ from . import models, forms
 import datetime
 from django.conf import settings
 import CoursePart.views as course_views
+from django.utils import timezone
 
 
 # Create your views here.
@@ -111,7 +112,9 @@ def logout(request):
 
 
 def make_confirm_string(user):
-    now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    # now = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    now = timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+    # now.__format__("%Y-%m-%d %H:%M:%S")
     code = hash_code(user.UserID, now)
     models.ConfirmString.objects.create(code=code, user=user, )
     return code
@@ -148,7 +151,8 @@ def user_confirm(request):
         return render(request, 'login/confirm.html', locals())
 
     JoinDate = confirm.JoinDate
-    now = datetime.datetime.now()
+    # now = datetime.datetime.now()
+    now = timezone.now()
     if now > JoinDate + datetime.timedelta(settings.CONFIRM_DAYS):
         confirm.user.delete()
         message = '您的邮件已经过期！请重新注册!'
