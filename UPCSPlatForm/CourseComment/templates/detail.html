@@ -1,18 +1,19 @@
+{% extends "base.html" %}
 {% load static %}
 {% load pagination_tags %}
-<!DOCTYPE html>
-<html>
 
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>{{course.name}}详情页</title>
+{% block title %}{{course.name}}详情页{% endblock %}
+{% block descriptions %}
 <meta name="keywords" content="课程详细页" />
 <meta name="description" content="这里展示课程详细信息和相关评价" />
+{% endblock %}
 
+{% block css %}
 <link href="{% static 'css/detail.css' %}" rel="stylesheet"/>
 <link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+{% endblock %}
 
-<script language="javascript" type="text/javascript">
+{% block js %}
 
     function clearText(field) {
         if (field.defaultValue == field.value) field.value = '';
@@ -33,10 +34,9 @@
         if(commentLabel.innerText ==="评论") toComment.value = "*"   /* *表示不是回复 */
     }
 
-</script>
-</head>
-<body>
+{% endblock %}
 
+{% block content %}
 <div id="templatemo_site_title_bar_wrapper">
 	<div id="templatemo_site_title_bar">
 	    <div id="site_title">
@@ -159,5 +159,9 @@
 
 </div>
 
-<div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>  </body> 
-</html>
+<div style="display:none">
+    <script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'>
+    </script>
+</div>
+
+{% endblock %}

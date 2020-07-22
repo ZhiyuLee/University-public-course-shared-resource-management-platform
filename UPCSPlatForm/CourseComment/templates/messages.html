@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block title %}{{course.name}}我的消息{% endblock %}
+
+{% block css %}
+<link href="{% static 'css/comments.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="comments">
+    {% autopaginate messages 3 as thisPageMessages %}
+    {% for message in thisPageMessages %}
+    <div class="comment-wrap">
+        <div class="comment-block">
+            <h4><a id="user_name">{{ message.To_Comment_ID.Comment_User_ID.UserName }}:</a></h4>
+            <p class="comment-text">{{ message.To_Comment_ID.Comment_text }}</p>
+            <div class="bottom-comment">
+                <div class="comment-date">{{ message.To_Comment_ID.Time }}</div>
+            </div>
+            <div class="comment-wrap">
+                <div class="comment-block">
+                    <h4><a id="user_name">{{ message.Comment_User_ID.UserName }}:</a></h4>
+                    <p class="comment-text">回复@{{ message.To_Comment_ID.Comment_User_ID.UserName }}:
+                        {{ message.Comment_text }}</p>
+                    <div class="bottom-comment">
+                        <div class="comment-date">{{ message.Time }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% paginate %}
+</div>
+
+{% endblock %}

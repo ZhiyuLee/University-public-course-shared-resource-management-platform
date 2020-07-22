@@ -20,7 +20,9 @@ urlpatterns = [
     path('captcha/', include('captcha.urls')),
     path('confirm/', views.user_confirm),
     path('detail/', comment_views.detail, name='detail'),
-    path('spider/', spider_views.index,name = 'spider'),
+    path('spider/', spider_views.index, name='spider'),
+    path('my_comments/', comment_views.my_comments, name='my_comment'),
+    path('messages/', comment_views.messages, name='messages'),
 
 ]
 

@@ -132,4 +132,28 @@ def query_by_id(ID):
     comment = models.Comment.objects.get(id=ID)
     return comment
 
+
+def query_by_user(user):
+    comments = models.Comment.objects.filter(Comment_User_ID=user)
+    return comments.order_by("-Time")
+
+
+def get_user_messages(user):
+    messages = models.Comment.objects.filter(To_Comment_ID__Comment_User_ID=user)
+    return  messages.order_by("-Time")
+
+
+def my_comments(request):
+    user_id = request.session.get('user_id')
+    user = user_views.query_by_id(user_id)
+    myComments = query_by_user(user)
+    return render(request, "my_comments.html", {"my_comments": myComments})
+
+
+def messages(request):
+    user_id = request.session.get('user_id')
+    user = user_views.query_by_id(user_id)
+    Messages = get_user_messages(user)
+    return render(request, "messages.html", {"messages": Messages})
+
 # End

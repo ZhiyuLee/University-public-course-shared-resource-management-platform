@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pagination_tags %}
+
+{% block title %}{{course.name}}我的评价{% endblock %}
+
+{% block css %}
+<link href="{% static 'css/comments.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block content %}
+<div class="comments">
+    {% autopaginate my_comments 5 as thisPageComments %}
+    {% for comment in thisPageComments %}
+    <div class="comment-wrap">
+        <div class="comment-block">
+            <h4><a id="user_name">{{ comment.Comment_User_ID.UserName }}:</a></h4>
+            {% if comment.To_Comment_ID == null %}
+                <p class="comment-text">{{ comment.Comment_text }}</p>
+            {% else %}
+                <p class="comment-text">回复@{{ comment.To_Comment_ID.Comment_User_ID.UserName }}:
+                    {{ comment.Comment_text }}</p>
+            {% endif %}
+            <div class="bottom-comment">
+                <div class="comment-date">{{ comment.Time }}</div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% paginate %}
+</div>
+
+{% endblock %}
