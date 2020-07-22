@@ -13,11 +13,26 @@
 <link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
 
 <script language="javascript" type="text/javascript">
-function clearText(field)
-{
-    if (field.defaultValue == field.value) field.value = '';
-    else if (field.value == '') field.value = field.defaultValue;
-}
+
+    function clearText(field) {
+        if (field.defaultValue == field.value) field.value = '';
+        else if (field.value == '') field.value = field.defaultValue;
+    }
+
+    function showReplyCommentArea(this_element,comment_id) {
+        let commentLabel = document.getElementById("comment_label")
+        var this_HTML = this_element.innerHTML
+        commentLabel.innerText = "回复@"+ this_HTML.slice(27,-4) +":"
+        let toCommentID = document.getElementById("to_comment_id")
+        toCommentID.value = comment_id
+    }
+
+    function checkReplyOrNot() {
+        let toComment = document.getElementById("to_comment_id")
+        let commentLabel = document.getElementById("comment_label")
+        if(commentLabel.innerText ==="评论") toComment.value = "*"   /* *表示不是回复 */
+    }
+
 </script>
 </head>
 <body>
@@ -88,12 +103,13 @@ function clearText(field)
                             {% csrf_token %}
 						    <div class="group">
                                 {{ commentForm.thisComment }}
+                                {{ commentForm.ToCommentID }}
 							    <span class="highlight"></span><span class="bar"></span>
-							    <label>评论</label>
+							    <label id="comment_label">评论</label>
 						    </div>
                         
 						    <div class="btn-box">
-							    <button type="submit" class="btn btn-submit">提交</button>
+							    <button type="submit" class="btn btn-submit" onclick="checkReplyOrNot()">提交</button>
 						    </div>
                         </form>
 						
@@ -111,9 +127,18 @@ function clearText(field)
                     {% autopaginate comments 4 as thisPageComments %}
                     {% for comment in thisPageComments %}
                     <div class="recent_post">
-                    	<h4><a>{{ comment.Comment_User_ID.UserName }}:</a></h4>
+                    	<h4><a id="user_name">{{ comment.Comment_User_ID.UserName }}:</a></h4>
+                        {% if comment.To_Comment_ID == null %}
                     	<div style="word-wrap: break-word;word-break: break-all;overflow: hidden;">{{ comment.Comment_text }}</div>
-                        <div style="text-align:right;">{{ comment.Time }}</div>
+                        {% else %}
+                        <div style="word-wrap: break-word;word-break: break-all;overflow: hidden;">回复@{{ comment.To_Comment_ID.Comment_User_ID.UserName }}:
+                            {{ comment.Comment_text }}</div>
+                        {% endif %}
+                        <div style="float:left;">
+                            <a style="color: #d43f3a" onclick="showReplyCommentArea(this, {{ comment.id }})">回复<p style="display:none;">{{ comment.Comment_User_ID.UserName }}</p></a></div>
+                        <div style="float:right;">{{ comment.Time }}</div>
+                        <div style="text-align: center">&nbsp</div>
+
                     </div>
                     
                     {% endfor %}

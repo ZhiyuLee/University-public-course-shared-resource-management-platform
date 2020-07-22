@@ -13,4 +13,10 @@ class CommentForm(forms.Form):
         )
     )
 
+    ToCommentID = forms.CharField(
+        label="被回复评论", max_length=128, widget=forms.TextInput(
+            attrs={'style': 'display:none;', 'id': "to_comment_id"}
+        )
+    )
+
 # End

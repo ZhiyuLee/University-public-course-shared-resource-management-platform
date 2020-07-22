@@ -16,7 +16,7 @@ import MySite.views as user_views
 thisPageCourse: Course = None
 
 
-def makeComment(request, course_id):
+def makeComment(request):
     commentForm = forms.CommentForm(request.POST)
     if commentForm.is_valid():
         comment = commentForm.cleaned_data.get('thisComment')  # 读取表单返回的值，返回类型为字典dict型
@@ -36,36 +36,27 @@ def makeComment(request, course_id):
 
 
 def replyComment(request):
-    if request.POST.get("to_someone"):  # 有此字段则为回复
-        user_id = request.session['user_id']
-        content = request.POST.get("content")
-        strategy_id = request.POST.get("strategy")
-        to_someone_id = request.POST.get("to_someone")
+    commentForm = forms.CommentForm(request.POST)
+    if commentForm.is_valid():
+        comment = commentForm.cleaned_data.get('thisComment')
+        user_id = request.session.get('user_id')
+        user = user_views.query_by_id(user_id)
+        course = thisPageCourse
+        to_comment_id = commentForm.cleaned_data.get("ToCommentID")
+        to_comment = query_by_id(to_comment_id)
 
         # 创建新回复
-        new_comment = models.Comment.objects.create(
-            user_id=user_id,
-            content=content,
-            strategy_id=strategy_id,
-            to_someone_id=to_someone_id
-        )
-        new_comment.save()
-        result = {'status': '回复成功'}
-        return JsonResponse(result)
-    else:
-        user_id = request.session['user_id']
-        content = request.POST.get("content")
-        strategy_id = request.POST.get("strategy")
-
-        # 创建新评论
-        new_comment = models.Comment.objects.create(
-            author_id=user_id,
-            content=content,
-            strategy_id=strategy_id
-        )
-        new_comment.save()
-        result = {'status': '评论成功'}
-        return JsonResponse(result)
+        newComment = models.Comment()
+        newComment.To_Comment_ID = to_comment
+        newComment.Comment_text = comment
+        newComment.Course_ID = course
+        newComment.Comment_User_ID = user
+        newComment.save()
+        comments = query_by_Course(thisPageCourse)
+        newCommentForm = forms.CommentForm()
+        return render(request, 'detail.html', {"course": thisPageCourse,
+                                               'commentForm': newCommentForm,
+                                               'comments': comments})
 
 
 def detail(request):
@@ -79,12 +70,19 @@ def detail(request):
         comments = query_by_Course(thisPageCourse)
         return render(request, 'detail.html', {'course': thisPageCourse,
                                                'commentForm': commentForm,
-                                               'comments':comments})
-    elif request.method == 'POST':
+                                               'comments': comments})
+    elif request.method == 'POST' and \
+            request.POST.get("ToCommentID") == '*':
         if thisPageCourse is None:
             return redirect('/index/')
-        ID = thisPageCourse.ID
-        return makeComment(request, ID)
+        # ID = thisPageCourse.ID
+        return makeComment(request)
+    elif request.method == 'POST' and \
+            request.POST.get("ToCommentID") != '*':
+        if thisPageCourse is None:
+            return redirect('/index/')
+        # ID = thisPageCourse.ID
+        return replyComment(request)
     elif request.method == "GET" and \
             request.GET.get('page') != '' and request.GET.get('page') is not None:
         comments = query_by_Course(thisPageCourse)
@@ -117,6 +115,21 @@ def detail(request):
 
 def query_by_Course(course):
     comments = models.Comment.objects.filter(Course_ID=course)
+    '''
+    for comment in comments:
+        if comment.To_Comment_ID is not None:
+            to_id = comment.To_Comment_ID
+            for to_comment in comments:
+                if to_comment.id == to_id:
+                    temp = comment
+                    comments.delete(comment)
+                    break
+    '''
     return comments.order_by("-Time")
+
+
+def query_by_id(ID):
+    comment = models.Comment.objects.get(id=ID)
+    return comment
 
 # End

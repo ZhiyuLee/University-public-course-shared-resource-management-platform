@@ -145,7 +145,6 @@ EMAIL_HOST_PASSWORD = 'qvqgffdtpiprbbcg'
 # 注册有效期天数
 CONFIRM_DAYS = 7
 
-
 # django_simple_captcha 验证码配置
 # 格式
 CAPTCHA_OUTPUT_FORMAT = u'%(text_field)s %(hidden_field)s %(image)s'
@@ -162,4 +161,7 @@ CAPTCHA_BACKGROUND_COLOR = '#ffffff'
 CAPTCHA_LENGTH = 4  # 字符个数
 CAPTCHA_TIMEOUT = 1  # 超时(minutes)
 CAPTCHA_CHALLENGE_FUNCT = 'captcha.helpers.math_challenge'    # 图片中的文字为数字表达式，如1+2=</span>
+
+# 分页显示在当前页左右两边的页数
+PAGINATION_DEFAULT_WINDOW = 1
 
