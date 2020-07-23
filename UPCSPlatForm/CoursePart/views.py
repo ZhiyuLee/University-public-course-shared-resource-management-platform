@@ -7,7 +7,8 @@ from django.shortcuts import render
 from CoursePart import models, tests
 import decimal
 from django.shortcuts import render, redirect
-from Favorites.views import delete_favor,add_favor
+from Favorites.views import delete_favor,add_favor,get_favorite_list
+import MySite.views as user_view
 
 
 
@@ -17,9 +18,9 @@ def index(request):
     if request.GET.get('course_name') != "" and \
             request.GET.get('course_name') is not None:
         courses = web_query_by_name(courses, request)
-    if request.GET.get('course_id') != "" and \
-            request.GET.get('course_id') is not None:
-        courses = web_query_by_id(courses, request)
+    if request.GET.get('course_college') != "" and \
+            request.GET.get('course_college') is not None:
+        courses = web_query_by_college(courses, request)
     if request.GET.get('course_teacher') != "" and \
             request.GET.get('course_teacher') is not None:
         courses = web_query_by_teacher(courses, request)
@@ -27,12 +28,21 @@ def index(request):
             request.GET.get('course_type') is not None:
         courses = web_query_by_type(courses, request)
     if request.method == 'POST':
+        # decision = request.POST.get('decision_id')
         if request.POST.get('decision_id') == "like":
-            add_favor(request.session.get('user_id'),request.POST.get('star_id'))
+            add_favor(request.session.get('user_id'), request.POST.get('star_id'))
         else:
-            delete_favor(request.session.get('user_id'),request.POST.get('star_id'))
+            delete_favor(request.session.get('user_id'), request.POST.get('star_id'))
     # all_course = get_all_courses()
-    return render(request, 'index.html', {'courses': courses})
+    user = user_view.query_by_id(request.session.get('user_id'))
+    stars = get_favorite_list(user)
+    real_stars = []
+    for star in stars:
+        for course in get_all_courses():
+            if course == star.Course_ID:
+                real_stars.append(course)
+                break
+    return render(request, 'index.html', {'courses': courses, 'stars': real_stars})
 
 
 def get_all_courses():
@@ -108,14 +118,15 @@ def web_query_by_id(courses, request):
             return render(request, 'index.html')
         return courses
 
+
 def query_by_id2(course_id):
-    courses =  models.Course.objects.all()
+    courses = models.Course.objects.all()
     if course_id:
         try:
             course = courses.filter(ID=course_id)
         except:
             return None
-        return course
+        return course.first()
 
 
 def web_query_by_teacher(courses, request):
@@ -133,6 +144,20 @@ def web_query_by_type(courses, request):
         course_type = request.GET.get('course_type')
         try:
             courses = query_by_type(courses, course_type)
+        except:
+            return render(request, 'index.html')
+        return courses
+
+
+def query_by_collage(courses, college):
+    return courses.filter(college__contains=college)
+
+
+def web_query_by_college(courses, request):
+    if request.method == "GET":
+        college = request.GET.get('course_college')
+        try:
+            courses = query_by_collage(courses, college)
         except:
             return render(request, 'index.html')
         return courses

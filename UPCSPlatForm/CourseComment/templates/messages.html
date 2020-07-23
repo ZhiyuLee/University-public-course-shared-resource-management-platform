@@ -14,7 +14,7 @@
     {% autopaginate messages 3 as thisPageMessages %}
     {% for message in thisPageMessages %}
     <div class="comment-wrap">
-        <div class="comment-block">
+        <div class="comment-block" style="word-wrap: break-word;word-break: break-all;overflow: hidden;">
             <h4><a id="user_name">{{ message.To_Comment_ID.Comment_User_ID.UserName }}:</a></h4>
             <p class="comment-text">{{ message.To_Comment_ID.Comment_text }}</p>
             <div class="bottom-comment">

@@ -9,6 +9,7 @@ from MySite import views
 from CoursePart import views as course_views
 from CourseComment import views as comment_views
 from spider import views as spider_views
+from Favorites import views as favor_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,6 +24,7 @@ urlpatterns = [
     path('spider/', spider_views.index, name='spider'),
     path('my_comments/', comment_views.my_comments, name='my_comment'),
     path('messages/', comment_views.messages, name='messages'),
+    path('star/', favor_views.star, name='messages'),
 
 ]
 

@@ -13,7 +13,7 @@
 <div class="comments">
     {% autopaginate my_comments 5 as thisPageComments %}
     {% for comment in thisPageComments %}
-    <div class="comment-wrap">
+    <div class="comment-wrap" style="word-wrap: break-word;word-break: break-all;overflow: hidden;">
         <div class="comment-block">
             <h4><a id="user_name">{{ comment.Comment_User_ID.UserName }}:</a></h4>
             {% if comment.To_Comment_ID == null %}

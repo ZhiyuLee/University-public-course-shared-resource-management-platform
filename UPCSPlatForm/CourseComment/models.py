@@ -10,7 +10,7 @@ from django.db import models
 
 
 class Comment(models.Model):
-    # Comment_ID = models.CharField(max_length=128, primary_key=True)
+    Comment_ID = models.AutoField(primary_key=True)
     Course_ID = models.ForeignKey(Course, related_name='course', on_delete=models.CASCADE)  # 评论所属课程
     Comment_User_ID = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE)  # 评论者
     # To_User_ID = models.ForeignKey(User, related_name='user2', null=True, on_delete=models.CASCADE)  # 回复者

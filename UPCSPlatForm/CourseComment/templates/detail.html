@@ -74,7 +74,7 @@
 						<div class="post_info">
                         
                             <div class="post_date">
-                                课程号:{{course.ID}}
+                                课程号:{{course.ID }}
 							</div>
                             
                             <div class="post_author">
@@ -135,7 +135,7 @@
                             {{ comment.Comment_text }}</div>
                         {% endif %}
                         <div style="float:left;">
-                            <a style="color: #d43f3a" onclick="showReplyCommentArea(this, {{ comment.id }})">回复<p style="display:none;">{{ comment.Comment_User_ID.UserName }}</p></a></div>
+                            <a style="color: #d43f3a" onclick="showReplyCommentArea(this, {{ comment.Comment_ID }})">回复<p style="display:none;">{{ comment.Comment_User_ID.UserName }}</p></a></div>
                         <div style="float:right;">{{ comment.Time }}</div>
                         <div style="text-align: center">&nbsp</div>
 
