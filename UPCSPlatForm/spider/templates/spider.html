@@ -4,13 +4,26 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <script>
+            function updateCourse(){
+                document.getElementById('update_id').value = 'update';
+                document.getElementById('update_btn').click();
+            }
+        </script>
     </head>
     <body>            
         <h1 class="text-center" >准备爬取教务系统，请手动登录得到cookies</h1>
-        <form action="/spider/" method="post">
+        <form action="/spider/" method="post" target = "iframe_id">
         {% csrf_token %}
             <input type = "text" id = "Cookies" name = "Cookies"></input>
             <button type="submit" class="btn" id="btn">爬取</button>
         </form>
+        <form action="/spider/" method="post" target = "iframe_id">
+        {% csrf_token %}
+            <input type = "text" id = "update_id" name = "update_id" hidden></input>
+            <button type="submit" class="update_btn" id="update_btn" onclick= "updateCourse()">更新</button>
+        </form>
+
+        <iframe id="iframe_id" name="iframe_id" style="display:none;"></iframe>
     </body>
 </html>

@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 import os
 from openpyxl import workbook  # 写入Excel表所用
 from openpyxl import load_workbook  # 读取Excel表所用
+import xlrd
+from CoursePart import views as CP_views
 
 #爬取武大教务系统并保存通识课程页面的htmldoc
 def spider(Cookies):
@@ -26,10 +28,7 @@ def spider(Cookies):
         'Upgrade-Insecure-Requests': '1',
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.162 Safari/537.36',
         }
-
-    #cookies = input('请输入cookies\n')  #如果单独使用爬虫可以去掉参数，然后直接命令行输入
-    cookies = Cookies
-    headers['cookie'] = cookies
+    headers['cookie'] = Cookies
     s = requests.Session()
     i = 1
     page_max = 25
@@ -37,11 +36,9 @@ def spider(Cookies):
         root = 'http://218.197.149.9/stu/choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum='
         url = root + str(i)
         res2 = s.get(url,headers = headers)    
-        #soup = BeautifulSoup(res2.text,'html.parser')
         filename = "spider\\txt\\"+str(i)+'.txt'
         txt_path = os.path.join(path,filename)
         with open(txt_path,'w',encoding='utf-8') as f:
-            #f.write(soup.prettify())
             f.write(res2.text)
             f.close
         i = i + 1
@@ -135,19 +132,33 @@ def output_excel():
     wb = workbook.Workbook() #创建Excel对象
     CourseInfoExcel = wb.active #获取当前正在操作的表对象
     #往表中写入标题行，以列表形式
-    CourseInfoExcel.append(['课程名','学分','教师名','职称','授课学院','领域','学年','学期','上课时间地点','备注'])
+    CourseInfoExcel.append(['课程号','课程名','学分','教师名','职称','授课学院','领域','学年','学期','学时安排','备注'])
     CourseInfo = []
     parser(CourseInfo)
-    print(CourseInfo)
     for i in range(len(CourseInfo)):
         CourseInfoExcel.append(CourseInfo[i])
     wb.save('CourseInfoExcel.xlsx')
 
 def index(request):
+    if not request.user.is_superuser:
+        return redirect('/admin/')
     if request.method == 'POST':
-        if not request.user.is_superuser:
-            return redirect('/admin/')
         Cookies = request.POST.get('Cookies')
-        spider(Cookies)
-        output_excel()
+        if Cookies!="":
+            spider(Cookies)
+            output_excel()
+        if request.GET.get('update_id')!="":
+            import_courses()
     return render(request,'spider.html')
+
+#导入数据库
+def import_courses():
+    data = xlrd.open_workbook('CourseInfoExcel.xlsx',encoding_override = 'utf-8')
+    sheetnames = data.sheet_names()
+    sheet_name = sheetnames[0]
+    table = data.sheet_by_name(sheet_name)
+    nrows = table.nrows
+    for i in range(1,nrows - 1):
+        if table.row_values(i):
+            # 课程名, 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
+            CP_views.add_course(table.row_values(i)[1],table.row_values(i)[6],table.row_values(i)[3],table.row_values(i)[4],table.row_values(i)[2],table.row_values(i)[9])

@@ -129,7 +129,7 @@ def query_by_Course(course):
 
 
 def query_by_id(ID):
-    comment = models.Comment.objects.get(id=ID)
+    comment = models.Comment.objects.get(Comment_ID=ID)
     return comment
 
 

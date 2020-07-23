@@ -29,4 +29,5 @@ class Comment(models.Model):
         verbose_name = "用户评价"
         verbose_name_plural = "用户评价"
 
+
 # End

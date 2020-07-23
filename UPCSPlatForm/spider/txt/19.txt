@@ -1,1060 +1,403 @@
+
+
+
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
- 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
-<meta http-equiv="Content-Style-Type" content="text/css"/>
-<title>选课界面</title>
+    <base href="http://218.197.149.9:80/"/>
+    <meta id="i18n_pagename" content="index-common">
+    <meta http-equiv="Content-Type" content="no-cache;charset=gb2312" />
+    <meta http-equiv="Cache-Control" content="no-cache,consolemust-revalidate">
+    <meta http-equiv="expires" content="0">
+    <title name='school'  class="i18n">武汉大学教务管理系统</title>
+    <link href="./css/style_common.css?v=2.002" type="text/css" rel="stylesheet"/>
+    <script type="text/javascript">
 
-<link rel="stylesheet" type="text/css" href="../css/style_common.css?v=2.002"/>
-<link rel="stylesheet" type="text/css" href="../css/tab.css?v=2.002"/>
+    </script>
+    <script type="text/javascript" src="../js/CheckCookie.js?v=2.002"></script>
+    <script type="text/javascript" src="../js/jquery.tools.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/jquery.i18n.properties.js"></script>
+    <script type="text/javascript" src="../js/language.js"></script>
+    <script type="text/javascript" src="../js/md5.js?v=2.002"></script>
 
-<script type="text/javascript" src="../js/jquery.tools.min.js"></script>
-<script type="text/javascript" src="../js/table.js?v=2.002"></script>
-<script type="text/javascript" src="../js/customControl.js?v=2.002"></script>
-<script type="text/javascript" src="../js/jquery.i18n.properties.js"></script>
-<script type="text/javascript" src="../js/languageSub.js"></script>
-<meta id="i18n_pagename" content="lessonCommon-lessonSelect-personalInfo">
+    <style>
 
-<script type="text/javascript"><!--
-// perform JavaScript after the document is scriptable.
-$(function() {
+        #sug {
+            list-style:none;
+            border:solid 1px #000;
+            margin-left:0;
+            margin-top:0;
+            margin-bottom:0;
+            width:250px;
+            background:white;
+        }
+        #sug li {
+            font-weight:normal;
+            font-color:black;
+            font-size:12px;
+            padding-left:2px;
+        }
 
-    
-    if (/Android|webOS|iPhone|iPad|BlackBerry/i.test(navigator.userAgent)) {
-        $("input[selectname='lesson_select']").attr("disabled",true);//选课按钮设置不可用
-        alert("手机端暂不支持选课，请使用电脑登录选课","提示");
+        .select {
+            background-color:#09f;
+            color:#ffffff;
+            cursor:default;
+        }
+        #top{
+            font-size: 18px;
+            line-height: 55px;
+            font-family: "宋体";
+            color: #626262;
+        }
+        .lan2{
+            padding-top:20px;
+            padding-left:1000px;
+        }
+        /* 二维码相关css*/
+        ul,li{
+            list-style:none;
+            zoom:1;
+            margin:0; padding:0;}
+        .keifu{
+            position:fixed;
+            top:10%; right:0; width:150px;
+            _position:absolute;
+            _top:expression(eval(document.documentElement.scrollTop+document.documentElement.clientHeight-this.offsetHeight-(parseInt(this.currentStyle.bottom,10)||0)-(parseInt(this.currentStyle.marginTop,10)||0)-(parseInt(this.currentStyle.marginBottom,10)||0)));
+            z-index:990;}
+        .keifu_tab{ width:160px;}
+        .icon_keifu{
+            width:26px; height:100px;
+            font-size: 14px;
+            color: teal;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+            background-color:white;
+            text-align: center;
+            float:left;
+            position:relative;
+            display:none;
+            cursor:pointer;}
+        .keifu_box{
+            float:left;
+            width:150px;
+            border: solid white;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+        }
+        .keifu_tab img{ display:block;}
+        .keifu_close{
+            display:block;
+            width:11px; height:11px;
+            position:absolute; top:5px; right:5px;}
+        .keifu_con{
+            /*border-left:7px solid ; border-right:7px solid ; */
+            padding-top:20px;
+            background:#fbfbfb;}
+        .keifu_con li{
+        }
+        .keifu_con .weixin{
+            height:136px;}
+        .codeTitle{
+            text-align: center;
+            font-size: 16px;
+            color: teal;
+        }
+        /* 二维码相关css结束*/
+        .sure-button > button {
+            background: #2191ea;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            padding: 5px 25px;
+        }
+        #gonggao{
+            margin: 200px 20px 0px 50px;
+            width: 500px;
+            padding: 50px 100px 100px 100px;
+            font-size: 15px;
+            color:#FFFFFF;
+        }
+        .checkBrowser1 {
+            text-align: center;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            background-color: #FFFFBB;
+            font-size: 15px;
+        }
+        #captcha-img2{
+            text-align: center;
+            display: none;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            background-color: #FFFFBB;
+            font-size: 15px;
+        }
+        #captcha-img3{
+            text-align: center;
+            display: none;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            background-color: #FFFFBB;
+            font-size: 15px;
+        }
+        #captcha-img4{
+            text-align: center;
+            display: none;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            background-color: #FFFFBB;
+            font-size: 15px;
+        }
+        #captcha-img{
+            text-align: center;
+            display: none;
+            height: 55px;
+            line-height: 55px;
+            width: 100%;
+            background-color: #FFFFBB;
+            font-size: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+
+        function getStuName(str)
+        {
+            var url = "/servlet/InputLenovo";
+            var parameter = "name="+str;
+            http_request = false;
+            if (window.XMLHttpRequest) { // Mozilla, Safari,...
+                http_request = new XMLHttpRequest();
+                if (http_request.overrideMimeType) {
+                    // set type accordingly to anticipated content type
+                    //http_request.overrideMimeType('text/xml');
+                    http_request.overrideMimeType('text/html');
+                }
+            } else if (window.ActiveXObject) { // IE
+                try {
+                    http_request = new ActiveXObject("Msxml2.XMLHTTP");
+                } catch (e) {
+                    try {
+                        http_request = new ActiveXObject("Microsoft.XMLHTTP");
+                    } catch (e) {}
+                }
+            }
+            if (!http_request) {
+                alert('Cannot create XMLHTTP instance');
+                return false;
+            }
+            http_request.open('POST', url, true);
+            http_request.onreadystatechange = function()
+            {
+                if(http_request.readyState==4&&http_request.status==200)
+                {
+                    var suggest=document.getElementById("suggest");
+                    suggest.innerHTML=http_request.responseText;
+                    //alert(XMLHttp.responseText);
+                    suggest.style.display="";
+                }
+            };
+            http_request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            http_request.setRequestHeader("RequestType","ajax");
+            http_request.send(parameter);
+        }
+
+        function makePOSTRequest(url,parameters,action) {
+
+        }
+        $(function(){
+
+            checkCookie();
+            //myexplorer();
+            //
+
+            /*二维码js*/
+            var KF = $(".keifu");
+            var wkbox = $(".keifu_box");
+            var kf_close = $(".keifu .keifu_close");
+            var icon_keifu = $(".icon_keifu");
+            var kH = wkbox.height();
+            var kW = wkbox.width();
+            var wH = $(window).height();
+            KF.css({height:kH});
+            icon_keifu.css("top",parseInt((kH-100)/2));
+            var KF_top = (wH-kH)/2;
+            if(KF_top<0) KF_top=0;
+            KF.css("top",KF_top);
+
+            $(kf_close).click(function(){
+                KF.animate({width:"0"},200,function(){
+                    wkbox.hide();
+                    icon_keifu.show();
+                    KF.animate({width:26},300);
+                });
+            });
+            $(icon_keifu).click(function(){
+                $(this).hide();
+                wkbox.show();
+                KF.animate({width:kW},200);
+            });
+        });
+
+    </script>
+    <script>
+        function change(){            var qgrBVb1=window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64"]("\x63\x61\x70\x74\x63\x68\x61\x2d\x69\x6d\x67\x31");            var uAjyqM2 = qgrBVb1["\x73\x72\x63"]["\x74\x6f\x53\x74\x72\x69\x6e\x67"]();            qgrBVb1["\x73\x72\x63"]=uAjyqM2["\x73\x75\x62\x73\x74\x72\x69\x6e\x67"](0,uAjyqM2["\x69\x6e\x64\x65\x78\x4f\x66"]("\x3f"))+"\x3f\x72\x64\x64\x64\x64\x3d"+window["\x4d\x61\x74\x68"]["\x72\x61\x6e\x64\x6f\x6d"]();            var VwWwo3=window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64"]("\x63\x61\x70\x74\x63\x68\x61\x2d\x69\x6d\x67\x32");            var iIcRJmFF4 = VwWwo3["\x73\x72\x63"]["\x74\x6f\x53\x74\x72\x69\x6e\x67"]();            VwWwo3["\x73\x72\x63"]=iIcRJmFF4["\x73\x75\x62\x73\x74\x72\x69\x6e\x67"](0,iIcRJmFF4["\x69\x6e\x64\x65\x78\x4f\x66"]("\x3f"))+"\x3f\x72\x64\x64\x64\x64\x3d"+window["\x4d\x61\x74\x68"]["\x72\x61\x6e\x64\x6f\x6d"]();            var lwVYImWuR5=window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64"]("\x63\x61\x70\x74\x63\x68\x61\x2d\x69\x6d\x67\x33");            var _Jnyeg6 = lwVYImWuR5["\x73\x72\x63"]["\x74\x6f\x53\x74\x72\x69\x6e\x67"]();            lwVYImWuR5["\x73\x72\x63"]=_Jnyeg6["\x73\x75\x62\x73\x74\x72\x69\x6e\x67"](0,_Jnyeg6["\x69\x6e\x64\x65\x78\x4f\x66"]("\x3f"))+"\x3f\x72\x64\x64\x64\x64\x3d"+window["\x4d\x61\x74\x68"]["\x72\x61\x6e\x64\x6f\x6d"]();            var pjKu7=window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x67\x65\x74\x45\x6c\x65\x6d\x65\x6e\x74\x42\x79\x49\x64"]("\x63\x61\x70\x74\x63\x68\x61\x2d\x69\x6d\x67\x34");            var rUkKGi8 = pjKu7["\x73\x72\x63"]["\x74\x6f\x53\x74\x72\x69\x6e\x67"]();            pjKu7["\x73\x72\x63"]=rUkKGi8["\x73\x75\x62\x73\x74\x72\x69\x6e\x67"](0,rUkKGi8["\x69\x6e\x64\x65\x78\x4f\x66"]("\x3f"))+"\x3f\x72\x64\x64\x64\x64\x3d"+window["\x4d\x61\x74\x68"]["\x72\x61\x6e\x64\x6f\x6d"]();        }
+
+        function beforsubmit(){            if (window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x70\x77\x64"]["\x76\x61\x6c\x75\x65"] !=""){                window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x70\x77\x64"]["\x76\x61\x6c\x75\x65"] = hex_md5(window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x70\x77\x64"]["\x76\x61\x6c\x75\x65"]);}            var vBGOiwPqc1 = new window["\x44\x61\x74\x65"]();            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x74\x69\x6d\x65\x73\x74\x61\x6d\x70"]["\x76\x61\x6c\x75\x65"] = vBGOiwPqc1["\x67\x65\x74\x54\x69\x6d\x65"]();            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x78\x64\x76\x66\x62"]["\x76\x61\x6c\x75\x65"] = encodeURI(window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x78\x64\x76\x66\x62"]["\x76\x61\x6c\x75\x65"]);            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x6a\x77\x62"]["\x76\x61\x6c\x75\x65"] = "\u6b66\u5927\u672c\u79d1"+ window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x6a\x77\x62"]["\x76\x61\x6c\x75\x65"]+"\u7cfb\u7edf";            window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x6a\x77\x62"]["\x76\x61\x6c\x75\x65"] = encodeURI(window["\x64\x6f\x63\x75\x6d\x65\x6e\x74"]["\x66\x6f\x72\x6d\x31"]["\x6a\x77\x62"]["\x76\x61\x6c\x75\x65"]);        }
+
+    </script>
+</head>
+<script language="JavaScript">
+    if (window != top){
+        top.location.href=location.href;
     }
-
-    // setup ul.tabs to work as tabs for each div directly under div.panes
-    $("ul.tabs").tabs("div.panes > div.panel",{
-		tabs:'li'
-	});
-	var triggers = $(".overlay").overlay({
-		target:$("#prompt",window.parent.parent.document),
-		fixed:false,
-		top:'10',
-		left:'0px',
-		closeOnClick:true,
-		onBeforeLoad:function(){
-			var index = this.getTrigger().attr("rel");
-			var wrap = this.getOverlay().find("iframe[name=overLayFrame]");
-			wrap.width(980);
-
-
-			var lessonHeadId=this.getTrigger().attr("id");
-			var act=this.getTrigger().attr('name');
-			parent.parent.startExpose();
-
-			if(act=="detail"){
-			wrap.width(820);
-				parent.parent.document.body.parentNode.style.overflow="scroll";
-			 	//wrap.attr("src","../stu/stu_courseDetail.jsp?lessonHeadId="+lessonHeadId); //点击“查看详情”后展示的界面
-			}else if (act=="lesson_seeSelectRule"){
-				wrap.attr("src","../stu/ChooseLsnRules.jsp?rel="+index);
-			}
-
-			var length = 1280;
-			var leftPosition = (length-980)/2;
-			this.getOverlay().css("left",leftPosition);
-
-
-
-		},
-		onBeforeClose:function(){parent.parent.closeExpose();},
-		onClose:function(){
-			this.getOverlay().find("iframe[name=overLayFrame]").attr("src","");
-		}
-  	});
-});
---></script>
-
-<script type="text/javascript">
-// perform JavaScript after the document is scriptable.
-/*
-lessonName:课程名
-credit:学分
-lessonHeadId:课程头号
-*/
-var maxLen = 3;
-function addCourse(lessonName,credit,lessonHeadId,teacherName,planType,lessonNameEng)
-{
-lessonNameEng = $(lessonNameEng).parent().find('.lessonNameEng').text();
-
-	lessonHeadId=lessonHeadId.trim();
-	var tb = $(window.parent.parent.frames['bar'].document.getElementsByTagName("table")[0]);
-	var form = $(window.parent.parent.frames['bar'].document.getElementById("myform"));
-	var count = form.children().length;
-	var flag = false;
-	form.children().each(function(){
-	//console.log($(this).val());
-	//console.log(lessonHeadId);
-			if($(this).val() == lessonHeadId){
-				flag = true;
-				return false;
-			}
-	});
-	
-    var language=getCookie1("userLanguage");console.log(language);
-    if(language=="zh-CN"){
-	if(flag == false&& count<=maxLen){
-	form.append("<input type='hidden' name='apply' value='"+lessonHeadId + "'/>");
-	var detail ="课头号："+lessonHeadId+"\r\n" + "学分："+credit+"\r\n" + "教师名："+teacherName+"\r\n"+"类型："+planType;
-	tb.append("<tr id ='"+lessonHeadId+"' style='border-bottom: 1px solid rgb(192, 192, 192);'" +"><td title='" + detail + "'>"+lessonName+"</td><td>"+"新增"+"</td><td><a href='#' onclick='courseDel(this)'>删除</a></td></tr>");
-	//点击后不变为不可选，因为删除后还不可以点亮，重新刷新后也不行，应该从jsp上，经过查询数据库后在显示
-	//$("#"+lessonHeadId).attr("disabled",true);
-	}
-	else if(flag == true){
-		customAlert("对不起，您已经选过该课程了！ ","选课提示:");}
-	else {customAlert("抱歉，每次最多只能选择"+maxLen+"门选修课程！","选课提示:")};
-	}else{
-		if(flag == false&& count<=maxLen){
-	form.append("<input type='hidden' name='apply' value='"+lessonHeadId + "'/>");
-	var detail ="Lesson Num："+lessonHeadId+"\r\n" + "Credit："+credit+"\r\n" + "Teacher Name："+teacherName+"\r\n"+"Type："+planType;
-	tb.append("<tr id ='"+lessonHeadId+"' style='border-bottom: 1px solid rgb(192, 192, 192);'" +"><td title='" + detail + "'>"+lessonNameEng+"</td><td>"+"Added"+"</td><td><a href='#' onclick='courseDel(this)'>Delete</a></td></tr>");
-	//点击后不变为不可选，因为删除后还不可以点亮，重新刷新后也不行，应该从jsp上，经过查询数据库后在显示
-	//$("#"+lessonHeadId).attr("disabled",true);
-	}
-	else if(flag == true){
-		customAlert("Sorry, you have already chosen this course！ ","Course selection tips:");}
-	else {customAlert("Sorry, you can only choose up to 6 elective courses at a time！","Course selection tips:")};
-	}
-}
-
 </script>
 
-<style>
-.tooltip {
-	z-index:600;
-    display:none;
-    background-color:gray;
-    font-size:14px;
-    width:260px;
-    padding:10px;
-    color:#fff;
-}
+<body class="greyBg">
+
+<div id="container" style="background-color: #6B91B6;">
+    
+    <!--<div id="top" style="line-height:30px;clear: both;font-size:16px">
+        <div style="margin: 0 auto;width: 1100px;">
+        <div class="tishi">	</div>
+        <div>武汉大学本科教学管理系统软件已进行升级，本学期选课期间新老系统均可使用。选课处理规则和结果均相同，同学们可访问响应较快的服务器！</div>
+        老版本
+          <a style="font-color:#005197;font-size:18px;font:宋体" href="http://202.114.74.198/" target="_blank">
+        入口一
+          </a>
+           <a style="font-color:#005197;font-size:18px;font:宋体" href="http://202.114.74.199/"  target="_blank">
+        入口二
+          </a>
+             </div>
+        </div>-->
+    <div id="main_contaier">
+        <div style="height: 55px;">
+            <div class="lan2">
+                <select id="language">
+                    <option value="zh-CN">简体中文</option>
+                    <option value="en">English</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="loginBox">
+            <form action="/servlet/_34388039353c52" method="post" name="form1" onsubmit="return verification();">
+                <input type="text" name="timestamp" hidden>
+                <input type="text" name="jwb" hidden value = "教务"/>
+                <table id="loginInputBox">
+                    <tr>
+                        <td><div class="label i18n" name="user-name"></div></td>
+                        <!--
+                        2013-3-6 邱霄峰 禁用了登录时的输入联想功能，该功能的实现在 js文件夹下的forindex.js
+                    <td colspan="2"><div class="inputWraper"><input name="id"    id="qxftest" tabindex="1"  onkeyup="loadDoc(this.value)"/></div>
+                         -->
+                        <td colspan="2"><div class="inputWraper"><input name="id"    id="qxftest" tabindex="1"  /></div>
+                            <div id="suggest" style="display:none;Z-index: 19998;position:absolute;"></div>
+                        </td>
+                        <td rowspan="2"><input type="submit" value="" id="loginBtn" tabindex="4" onclick="beforsubmit()"></td>
+                    </tr>
+                    <tr>
+                        <td ><div class="label i18n" name="password"></div></td>
+                        <td colspan="2"><div class="inputWraper"><input name="pwd" type="password" tabindex="2"/></div></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="label i18n" name="verifycode"></div>
+                            <img id="captcha-img" alt="验证码" src="/servlet/_sdf234s23f32f?v=4"/>
+                        </td>
+                        <td style="text-align: left;" colspan="3">
+                            <div class="inputWraper" style="width:90px;float:left"><input name="xdvfb" tabindex="3"/></div>
+                            <div style="height:34px;margin:5px 5px 5px 5px;float:left;">
+                                <img id="captcha-img2" class="show" name="eat" alt="验证码" src="/servlet/GenImg?v=1"/>
+                                <img id="captcha-img1" class="hide" name="sleep" alt="验证码" src="/servlet/_51d5096830?v=2"/>
+                                <img id="captcha-img3" class="hide" name="run" alt="验证码" src="/servlet/_4F6T314?v=3"/>
+                                <img id="captcha-img4" class="show" name="fly" alt="验证码" src="/servlet/_sdf234s23f32f?v=4"/>
+                            </div>
+                            <div style="float:left;font-size:10px;margin-left:5px ; margin-top:15px;">
+                                <a class="i18n change-captcha "  onclick="change()" style="line-height:30px;margin-top:10px;font-size:13px;font:宋体;" href="javascript:void(0);" name="verifyingCode"></a>
+                            </div>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    
+                        
+                        
+                    <tr><td colspan="4" style="text-align: center;"><br/><font color="red" style="font-size: 12px;">会话超时，请重新登录<label id="alertp"></label></font></td></tr>
+                    <tr>
+                        <td style="text-align: right;font-size:13px;" colspan="4" >
+                            <a href="javascript:void(0);" class="i18n" name="forgetPassword" onclick="forget()"></a>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+            <!--<div id="gonggao">
+                <div>各位同学：由于教务选课系统设计缺陷，导致学生选课出现困难，我们深表歉意并诚挚道歉。我们正在紧急维护修复, 尽快确保系统正常运行，确保同学们正常选课。</div>
+            </div>
+    --></div>
+
+    </div>
+
+    <div id="footer" class="stu_footer">
+
+        <div class="first-part-footer">
+            <div class="first-part i18n" name="schoolname"></div>
+            <div class="second-part">
+                <p><span class='i18n' name='UndergraduateSchool'></span><span class="footer-oper i18n" style="margin-right:14px;" name='host'></span></p>
+                <p><span class='i18n' name='ComputerScience'></span><span class="footer-oper i18n" name='made'style="margin-right:14px;"></span></p>
+                <p><span class='i18n' name='NetworkInformationCenter'></span><span class="footer-oper i18n" name='Platformguarantee'></span></p>
+            </div>
+        </div>
+        <div class="border-right"></div>
+        <div class="second-part-footer">
+            
+            
+            
+            
+            <br/>
+            <a style="cursor:pointer" href="common/problem.html" target="view_window">&diams;常见问题&diams;</a>
+            
+            
+
+        </div>
+    </div>
+
+</div>
+<!--
+        <div class="modal" id="prompt" style="position:absolute;z-index:1000;left:10px">
+           <div class="overlayContent" id="overlayContent">
+               <iframe name="overLayFrame" id="overLayFrame" width="100%" frameborder="0"></iframe>
+           </div>
+       </div>
+       <input class="overlay" style="display:none;" type="button"/>
+        -->
+
+<div class="keifu">
+
+    <div class="icon_keifu ">展开二维码</div>
+    <div class="keifu_box">
+        <div ><a href="javascript:void(0)" class="keifu_close">X</a></div>
+        <ul class="keifu_con">
+            <p class="codeTitle">安卓APP二维码</p>
+            <li class="weixin"><img src="images/android.png" width="126" height="126" alt="安卓APP二维码" /></li></br>
+            <p class="codeTitle">苹果APP二维码</p>
+            <li class="weixin"><img src="images/iOS.png" width="126" height="126" alt="苹果APP二维码" /></li>
+            <p class="codeTitle">打开手机下载教务APP吧~</p>
+        </ul>
+    </div>
 
-
-<!-- 弹出层-->
-.black_overlay{
-	display: none;
-	position: fixed;
-	top: 0%;
-	left: 0%;
-	width: 100%;
-	height: 100%;
-	background-color: black;
-	z-index:1001;
-	-moz-opacity: 0.8;
-	opacity:0.5;
-	filter: alpha(opacity=50);
-}
-.white_content {
-    display: none;
-    position: absolute;
-    top: 35%;
-    left: 36%;
-    width: 33%;
-    border: 2px solid #d3d3d3;
-    background-color: white;
-    z-index: 1002;
-	/* overflow: auto; */
-}
-.white_content_small {
-	display: none;
-	position: absolute;
-	top: 20%;
-	left: 30%;
-	width: 40%;
-	height: 50%;
-	border: 16px solid lightblue;
-	background-color: white;
-	z-index:1002;
-	overflow: auto;
-}
-
-table {
-	table-layout: fixed;
-}
-table td,th {
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
-}
-#hint {
-	line-height: 20px;
-	position: absolute;
-	background: #808080;
-	padding: 5px 10px;
-	font-size: 14px;
-	color: #FFF;
-	display: none;
-}
-
-</style>
-</head>
-<body style="background-color:transparent">
-
-	    
-    	<form action="choose_PubLsn_list.jsp" method="post" >
-    	
-	    	<div id="searchBox" >
-	           <span class="i18n" name="college">校区</span>&nbsp;
-	            <select name="XiaoQu" class="input" style="width:60px;">
-	                <option value ="0" selected class="i18n" name="allSchool">全校</option>
-					<option value ="1"  class="i18n" name="oneCampus">1区</option>
-					<option value ="2"  class="i18n" name="twoCampus">2区</option>
-					<option value ="3"  class="i18n" name="thirdCampus">3区</option>
-					<option value ="4"  class="i18n" name="forthCampus">4区</option>
-	            </select>&nbsp;&nbsp;
-	            <span class="i18n" name="lesson_credit">学分</span>&nbsp;
-	            <select name="credit" class="input" style="width:60px;">
-	                <option  value ="0" selected  class="i18n" name="allCredit">所有</option>
-	                
-	                <option  value =0.5 >0.5</option>
-
-	                 
-	                <option  value =1.0 >1.0</option>
-
-	                 
-	                <option  value =1.5 >1.5</option>
-
-	                 
-	                <option  value =2.0 >2.0</option>
-
-	                 
-	                <option  value =2.5 >2.5</option>
-
-	                 
-	                <option  value =3.0 >3.0</option>
-
-	                 
-	                <option  value =4.0 >4.0</option>
-
-	                 
-	            </select>&nbsp;&nbsp;
-	                
-	            <input style="color:#696969" name="keyword" type="text" id="cx" value='课程名/教师名' onfocus="if (value =='课程名/教师名'){value =''}" onblur="if (value ==''){value='课程名/教师名'}" />
-	            <input type="submit" name="submit" class="searchBtb "  value="查询" onclick="addTimestampZh()"/>
-	      		
-				<input type="text" name="timestamp" value="1595491993436" hidden>
-	       <!--    <a href="../stu/chooseLsnaaaa.html" target="_blank" class="a_btn" >查看选课规则</a>	       -->
-	        </div>
-        </form>
-
-	    <div class="tipInfo i18n" name="lesson_inquireRange" data-lang-args="2019~2020~2">
-           *查询范围：2019到2020学年2学期的课程
-    	</div>
-<table class="table listTable" style="table-layout: fixed;" width="100%">
-	<tr>
-		<th class="i18n" name="lesson_lessonName">课程名</th>
-		<th style="width:30px;" class="i18n" name="lesson_credit">学分</th>
-		<th style="width:80px;" class="i18n" name="lesson_leftMax">剩余/最大人数</th>
-		<th style="width:60px;" class="i18n" name="lesson_lessonTeacher">教师</th>
-		<th style="width:55px;" class="i18n" name="lesson_jobTitle">职称</th>
-		<th style="width:100px;" class="i18n" name="lesson_teachingCollege">授课学院</th>
-		<th style="width:80px;" class="i18n" name="lesson_fieldname">领域</th>
-		<th style="width:40px;" class="i18n" name="lesson_year">学年</th>
-		<th style="width:40px;" class="i18n" name="lesson_term">学期</th>
-		<th style="width:150px;" style="text-align:center;" class="i18n" name="lesson_timeAndPlace">上课时间地点详细</th>
-		<th style="width:130px;" class="i18n" name="lesson_note">备注</th>
-		<th style="width:75px;" class="i18n" name="lesson_select">选课</th>
-		<!--<th style="width:75px;" class="i18n" name="lesson_calendar">教学日历下载</th>-->
-		<th style="width:75px;" class="i18n" name="lesson_operation">操作</th>
-	</tr>
-
-  <!-- 显示已选课程的数据 -->
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">现代生活方式与寄生虫感染</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">144</font>/150</td>
-    <td >明珍平</td>
-    <td>副教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067197                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067197                     " lessonNum="2333610011123" lessonName="现代生活方式与寄生虫感染"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">艾滋病防治   </td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">86</font>/150</td>
-    <td >侯炜</td>
-    <td>教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067198                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067198                     " lessonNum="2333610011124" lessonName="艾滋病防治   "
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">生活中的经济法</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">1</font>/90</td>
-    <td >周围</td>
-    <td>讲师</td>
-    <td>法学院</td>
-    <td >社会科学与现代社会</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192006971                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192006971                     " lessonNum="2334220011164" lessonName="生活中的经济法"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">医学史（医学这些事儿）</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">3</font>/100</td>
-    <td >刘永明</td>
-    <td>副教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067200                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067200                     " lessonNum="2333610011126" lessonName="医学史（医学这些事儿）"
-	plantype="通识教育选修" commontype="一般通识" bookName="《医学史（第2版）》（张大庆）                                                                                     " credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">旅行生活与寄生虫病 </td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">56</font>/80</td>
-    <td >蔡国斌</td>
-    <td>副教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067201                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067201                     " lessonNum="2333610011127" lessonName="旅行生活与寄生虫病 "
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">疫苗与健康</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">125</font>/150</td>
-    <td >刘万红</td>
-    <td>教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067202                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067202                     " lessonNum="2333610011291" lessonName="疫苗与健康"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">人体故事：演化、健康与疾病</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">56</font>/100</td>
-    <td >王燕舞</td>
-    <td>讲师</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067203                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067203                     " lessonNum="2333610011292" lessonName="人体故事：演化、健康与疾病"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">食品安全与寄生虫感染</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">94</font>/150</td>
-    <td >董惠芬</td>
-    <td>教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067204                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067204                     " lessonNum="2333610011294" lessonName="食品安全与寄生虫感染"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">生物医药产业创新与现代社会</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">139</font>/150</td>
-    <td >杨国华</td>
-    <td>副教授</td>
-    <td>基础医学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192067205                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192067205                     " lessonNum="4333610011293" lessonName="生物医药产业创新与现代社会"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="是" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">海绵城市与生态文明</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">90</font>/100</td>
-    <td >周毅</td>
-    <td>副教授</td>
-    <td>土木建筑工程学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192020916                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192020916                     " lessonNum="4333430011279" lessonName="海绵城市与生态文明"
-	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="是" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">文学欣赏与批评</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">9</font>/90</td>
-    <td >陈国恩</td>
-    <td>教授</td>
-    <td>文学院</td>
-    <td >艺术体验与审美鉴赏</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192031237                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192031237                     " lessonNum="2332120011192" lessonName="文学欣赏与批评"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">能源与环境</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">89</font>/120</td>
-    <td >汪的华</td>
-    <td>教授</td>
-    <td>资源与环境科学学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192014023                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192014023                     " lessonNum="2333350011270" lessonName="能源与环境"
-	plantype="通识教育选修" commontype="一般通识" bookName="自编讲义                                                                                                                    " credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">环境与人类</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">74</font>/100</td>
-    <td >施晓文</td>
-    <td>教授</td>
-    <td>资源与环境科学学院</td>
-    <td >科学精神与生命关怀</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td title="<div>肖玲，彭善枝，章玲，邓红兵</div>" id="tips">
-	    <div class="overflow">
-		    肖玲，彭善枝，章玲，邓红兵
-		</div>
-		 <div class="redTriangle"></div> 
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192014020                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192014020                     " lessonNum="2323350011227" lessonName="环境与人类"
-	plantype="通识教育选修" commontype="核心通识" bookName="自编讲义                                                                                                                    " credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="肖玲，彭善枝，章玲，邓红兵" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">新时代中国特色大国外交与国际关系</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">31</font>/100</td>
-    <td >赵嵘</td>
-    <td>副教授</td>
-    <td>政治与公共管理学院</td>
-    <td >中华文化与世界文明</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192034358                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192034358                     " lessonNum="2331230011256" lessonName="新时代中国特色大国外交与国际关系"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-  <tr>
-    
-
-    <td  style=" word-wrap:break-word;">中国政府与社会治理</td>
-    
-     <td>2.0</td>
-     <td><font color="#FF0000">83</font>/100</td>
-    <td >刘杉</td>
-    <td>副教授</td>
-    <td>政治与公共管理学院</td>
-    <td >社会科学与现代社会</td>
-    <td >2019</td>
-     <td >2</td>
-    
-    
-
-    
- 
-    <td >
-	    <div class="overflow">
-	    	
-		</div>
-		
-	</td>
-    <td >
-	    <div class="overflow">
-		    无
-		</div>
-		
-    </td>
-    <td>
-    
-    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192034546                     " disabled />
-    
-    </td>
-	<td>
-	
-	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
-	lessonHeadId="20192034546                     " lessonNum="2334230011315" lessonName="中国政府与社会治理"
-	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
-	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
-	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
-	</td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-
-    
-	
-    
-  </tr>
-
-  
-
-</table>
-
-<div class="page_nav">
-	<div class="total_count">共有<span style='color:red;'>373</span>条记录 第19/25页&nbsp;&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=1" class="menu">首页</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=18" class="navegate"> &lt;上一页</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=1" class="navegate">1</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=2" class="navegate">2</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=3" class="navegate">3</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=4" class="navegate">4</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=5" class="navegate">5</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=6" class="navegate">6</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=7" class="navegate">7</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=8" class="navegate">8</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=9" class="navegate">9</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=10" class="navegate">10</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=11" class="navegate">11</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=12" class="navegate">12</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=13" class="navegate">13</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=14" class="navegate">14</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=15" class="navegate">15</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=16" class="navegate">16</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=17" class="navegate">17</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=18" class="navegate">18</a>&nbsp;19&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=20" class="navegate">20</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=21" class="navegate">21</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=22" class="navegate">22</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=23" class="navegate">23</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=24" class="navegate">24</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=25" class="navegate">25</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=20" class="navegate">下一页 &gt; </a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=25" class="navegate">尾页</a></div>
 </div>
 <!--弹框内容-->
-<div id="fade" class="black_overlay" style="display: none;
+<div id="fade" class="" style="display: none;
 	position: absolute;
 	top: 0%;
 	left: 0%;
@@ -1065,215 +408,103 @@ table td,th {
 	-moz-opacity: 0.8;
 	opacity:0.3;
 	filter: alpha(opacity=50);"></div>
-<div id="MyDiv" class="white_content" style="display: none;
+<div id="MyDiv" class="" style="display: none;
     position: absolute;
-    top: 20%;
-    left: 20%;
-    width: 660px;
-    height:400px;
+    top: 30%;
+    left: 40%;
+    width: 450px;
+    height:280px;
     border: 2px solid #d3d3d3;
-    background-color: white;
+    background-color: #f0efef;
     z-index: 1002;">
-	<div id="close" style="text-align: right; cursor: default; margin-top:10px;margin-bottom:10px;">
-		<span  style="font-size: 13px; margin-right: 17px; color: #333333; font-weight: 300;cursor:pointer;" >关闭</span>
-	</div>
-	<h3 class="i18n" name="courseDetail">课程详情</h3>
-	<table id="detailTable" class="table listTable">
-	<tr class="TR_TITLE" height="20">
-		<td width="10%" class="i18n" name="lesson_lessonHead">课头号</td>
-		<td width="30%" colspan="2" name="lessonHeadId"></td>
-		<td width="13%" class="i18n" name="lesson_lessonNum">课程号</td>
-		<td width="33%" colspan="2" name="lessonNum"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td width="10%" class="i18n" name="lesson_lessonName">课程名</td>
-		<td width="" colspan="5" name="lessonName"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td width="10%" class="i18n" name="lesson_lessonType">课程类型</td>
-		<td width="16%" colspan="1" name="plantype"></td>
-		<td width="14%" class="i18n" name="lesson_commontype">通识课类型</td>
-		<td width="13%" colspan="1" name="commontype"></td>
-		<td width="13%" class="i18n" name="lesson_textbook">教材</td>
-		<td width="20%" colspan="1" name="bookName"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td width="" class="i18n" name="lesson_creditTotal">总学分</td>
-		<td width="" colspan="1" name="credit"></td>
-		<td width="" class="i18n" name="lesson_throry_credit">理论学分</td>
-		<td width="" colspan="1" name="throry_credit"></td>
-		<td width="" class="i18n" name="lesson_practice_credit">实践学分</td>
-		<td width="" colspan="1" name="practice_credit"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td width="" class="i18n" name="lesson_hour">理论学时</td>
-		<td width="" colspan="1" name="hour"></td>
-		<td width="" class="i18n" name="lesson_hour_exp">实践学时</td>
-		<td width="" colspan="1" name="hour_exp"></td>
-		<td width="" class="i18n" name="lesson_hour_mac">上机学时</td>
-		<td width="" colspan="1" name="hour_mac"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td width="" class="i18n" name="lesson_teachtype">授课方式</td>
-		<td width="" colspan="1" name="teachtype"></td>
-		<td width="" class="i18n" name="lesson_isspecify">指定选修</td>
-		<td width="" colspan="1" name="isspecify"></td>
-		<td width="" class="i18n" name="lesson_iscreative">创新创业</td>
-		<td width="" colspan="1" name="iscreative"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td height="60" class="i18n" name="lessonIntro">课程简介</td>
-		<td colspan="5" name="introduce"></td>
-	</tr>
-	<tr class="TR_TITLE">
-		<td class="i18n" name="lesson_note">备注</td>
-		<td colspan="5" name="note"></td>
-	</tr>
-	
-	</table>
-
-
+    <h2 style="color:#2191ea;padding: 30px;">请输入账号</h2>
+    <input class="forgetID" type="text" style="width: 230px;margin: 5px 0;height: 30px;line-height: 30px;" />
+    <p>*在进入忘记密码页前请输入要找回密码的账号</p>
+    <div class="sure-button" style="margin-top:50px;">
+        <button type="submit" id="regBtn" >确认</button> &nbsp;&nbsp;
+        <button id="cancelBtn">取消</button>
+    </div>
 </div>
-
-
+<script type="text/javascript" src="../js/customControl.js?v=2.002"></script>
 <script type="text/javascript">
-$(function() {
-	// initialize tooltip
-	$("td[title]").tooltip({
-		position: "center left",
-	   // tweak the position
-	   offset: [10, 2],
-	   // use the "slide" effect
-	   effect: 'slide',
-	   onBeforeShow:function(){
-	   		var tip = this.getTip();
-	   		var brCount = tip.contents().find("br").length;
-	   		//if(brCount>1)
-	   			tip.height(brCount*16+16);
-	   		//else{
-	   			//tip.height(brCount*16+16);
-	   			//tip.width(tip.contents().html().length*16);
-	   		//}
-	   }
-	// add dynamic plugin with optional configuration for bottom edge
-	});
-});
-//弹出层
-//var parent$ = window.parent.jQuery;
-//parent$("#fade").show();
-$("input[name='detail']").click(function(){
-//var scrollHeight =document.documentElement.clientHeight;
-	var scrollHeight =document.body.scrollHeight; //文档高度
-	//scrollHeight=window.parent.parent.document.body.scrollHeight;
-	document.getElementById("fade").style.height=scrollHeight+'px';
-	var bg1=document.getElementById("fade").innerHTML;
+    function closeTip1()
+    {
+        jQuery('.checkBrowser1').slideUp();
+    }
+    var myexplorer="";
+    var explorer = window.navigator.userAgent;
+    console.log(explorer)
+    if(explorer.indexOf("MSIE 6.0")>=1){  //如果浏览器为IE6
+        tip();
+        console.log("MSIE 6.0");
+    }else if (explorer.indexOf("MSIE 7.0")>=1){  //如果浏览器为IE7
+        tip();
+        console.log("MSIE 7.0");
+    }else if(explorer.indexOf("MSIE 8.0")>=1){
+        tip();
+        console.log("MSIE 8.0");
+    }else if(explorer.indexOf("MSIE 9.0")>=1){
+        tip();
+        console.log("MSIE 9.0");
+    }else if(explorer.indexOf("MSIE 10.0")>=1){
+        tip();
+        console.log("MSIE 10.0");
+    }else if(explorer.indexOf('Trident') > -1 && explorer.indexOf("rv:11.0") > -1){
+        tip();
+        console.log("MSIE 11.0");
+    }else if (explorer.indexOf("QQBrowser")>=0 || explorer.indexOf("QQ")>=0){
+        tip();
+        console.log("腾讯qq");
+    }else if(explorer.indexOf("Safari")>=0 && explorer.indexOf("MetaSr")>=0){
+        myexplorer="搜狗";
 
-	$("#fade").show();
-	//window.top.document.body.append(document.getElementById("fade"));
-	//var id=a.getAttribute("id");
-	//document.getElementById("label").value=id;
-	$("#MyDiv").show();
-	$("td[name='lessonHeadId']").text(this.getAttribute("lessonHeadId"));
-	$("td[name='lessonNum']").text(this.getAttribute("lessonNum"));
-	$("td[name='lessonName']").text(this.getAttribute("lessonName"));
-	$("td[name='plantype']").text(this.getAttribute("plantype"));
-	$("td[name='commontype']").text(this.getAttribute("commontype"));
-	$("td[name='bookName']").text(this.getAttribute("bookName"));
-	$("td[name='credit']").text(this.getAttribute("credit"));
-	$("td[name='throry_credit']").text(this.getAttribute("throry_credit"));
-	$("td[name='practice_credit']").text(this.getAttribute("practice_credit"));
-	$("td[name='hour']").text(this.getAttribute("hour"));
-	$("td[name='hour_exp']").text(this.getAttribute("hour_exp"));
-	$("td[name='hour_mac']").text(this.getAttribute("hour_mac"));
-	$("td[name='teachtype']").text(this.getAttribute("teachtype"));
-	$("td[name='isspecify']").text(this.getAttribute("isspecify"));
-	$("td[name='iscreative']").text(this.getAttribute("iscreative"));
-	$("td[name='introduce']").text(this.getAttribute("introduce"));
-	$("td[name='note']").text(this.getAttribute("note"));
-	if(this.getAttribute("address")==null||this.getAttribute("address")==""){
-		$("a[name='lesson_calendar']").removeAttr("href");
-	}
-	//window.top.document.body.append(document.getElementById("MyDiv"));
+    }else if(explorer.indexOf("LBBROWSER") >= 0){
+        tip();
+        myexplorer="猎豹";
+    }else if(explorer.indexOf("Firefox")>=0){
+        myexplorer="火狐";
+    }else if(explorer.indexOf("Maxthon")>=0){
+        tip();
+        myexplorer="遨游";
+    }else if(explorer.indexOf("Chrome")>=0){
+        myexplorer="谷歌（或360伪装）";
+    }else if(explorer.indexOf("Opera")>=0){
+        tip();
+        yexplorer="欧朋";
+    }else if (explorer.indexOf("TheWorld") >= 0){
+        tip();
+        myexplorer="世界之窗";
+    }else if(explorer.indexOf("Safari")>=0){
+        tip();
+        myexplorer="苹果";
+    }else{
+        tip();
+    }
+    //(!!window.ActiveXObject || "ActiveXObject" in window){//IE
 
-})
-/*function ShowDiv(show_div,bg_div,a){
-	var scrollHeight =document.body.scrollHeight; //文档高度
-	scrollHeight=window.parent.parent.document.body.scrollHeight;
-	document.getElementById(bg_div).style.height=scrollHeight+'px';
-	//var bg=document.getElementById(bg_div).html();
-	var bg1=document.getElementById(bg_div).innerHTML;
+    console.log("浏览器"+myexplorer)
 
-	document.getElementById(bg_div).style.display='block';
-	window.top.document.body.append(document.getElementById(bg_div));
-	console.log(bg1);
-	//bg.appendTo(window.document.body);
-	var id=a.getAttribute("id");
-	document.getElementById("label").value=id;
-	document.getElementById(show_div).style.display='block';
-	window.top.document.body.append(document.getElementById(show_div));
-};*/
-//关闭弹出层
-function CloseDiv(show_div,bg_div)
-{
-	document.getElementById("label").value = '';
-	document.getElementById(show_div).style.display='none';
-	document.getElementById(bg_div).style.display='none';
-};
-//关闭弹出层
-$("#close").click(function(){
+    function tip(){
+        customAlert("检测到您的浏览器与系统不兼容，请您使用谷歌、360（极速模式）、火狐浏览器","提示");
+    }
+    function forget(){
+        var scrollHeight =document.body.scrollHeight; //文档高度
+        document.getElementById("fade").style.height=scrollHeight+'px';
+        document.getElementById("fade").style.width=document.body.scrollWidth+'px';
+        $("#fade").show();
+        $("#MyDiv").show();
+        $("#cancelBtn").click(function(){
+            $("#fade").hide();
+            $("#MyDiv").hide();
+        });
 
-	$("#MyDiv").hide();
-	$("#fade").hide();
-	document.getElementById("fade").style.display='none';
-});
-function CloseDiv2()
-{
-	document.getElementById("MyDiv").style.display='none';
-	document.getElementById("fade").style.display='none';
-};
-
+        $("#regBtn").click(function(){
+            var id=$(".forgetID").val();
+            console.log("id="+id);
+            window.location.href = "../stu/forget.jsp?id="+id;
+        });
+        
+    }
 </script>
-
-<script type="text/javascript">
-	$(function() {
-
-		var x = 55;
-		var y = 15;
-
-		$("td, th").mouseover(function(e) {
-			if (this.offsetWidth < this.scrollWidth) {
-				//console.log("此单元框内的内容已溢出!!!");
-
-				var myTitle = $(this).text();
-				var hint = "<div id='hint'>" + myTitle + "</div>";
-				$("body").append(hint);
-
-				$("#hint").css({
-					"top": (e.pageY + y) + "px",
-					"left": (e.pageX - x) + "px"
-				}).show("fast");
-			}
-
-		}).mouseout(function() {
-			$("#hint").remove();
-
-		}).mousemove(function(e) {
-			$("#hint").css({
-				"top": (e.pageY + y) + "px",
-				"left": (e.pageX - x) + "px"
-			});
-		});
-
-	})
-	function addTimestampZh() {
-		if($(':text').val()=='课程名/教师名') {$(':text').val('')}
-		document.forms[0].timestamp.value = '1595491993437'
-           	}
-	function addTimestampEn() {
-		if($(':text').val()=='课程名/教师名') {$(':text').val('')}
-		document.forms[0].timestamp.value = '1595491993437'
-	}
-</script>
-
 </body>
 </html>

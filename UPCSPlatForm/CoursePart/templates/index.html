@@ -92,8 +92,8 @@
                 decision.value = 'cancel';
                 star_btn.click();
             }
+            return false;
         }
-		
     {% endblock %}
 
 {% block content %}
@@ -104,37 +104,7 @@
 
 <div id="container" >
 
-
-    <div class="search bar7" style="float: right">
-        <form action="/index/" method="get">
-            <input type="text" id="course_teacher" onchange='changeTeacher(this)' placeholder="请输入您要搜索的教师名">
-            <input style='display:none' />
-            <button type="button" id="teacher_btn" onclick="submitAll()"></button>
-        </form>
-    </div>
-
-    <div class="search bar7" style="float: right">
-        <form action="/index/" method="get">
-            <input type="text" id="course_college" onchange='changeCollege(this)' placeholder="请输入要搜索的授课学院">
-            <input style='display:none' />
-            <button type="button" id="college_btn" onclick="submitAll()"></button>
-        </form>
-    </div>
-
-    <form action="/index/" method="get">
-        <input type="text" id="hidden_type" name="course_type" hidden>
-        <input type="text" id="hidden_college" name="course_college" hidden>
-        <input type="text" id="hidden_teacher" name="course_teacher" hidden>
-        <input type="text" id="hidden_name" name="course_name" hidden>
-        <button type="submit" id="hidden_btn" hidden></button>
-    </form>
-
-    <form action="/detail/" method="get">
-        <input type="text" id="detail_id" name="detail_id" hidden>
-        <button type="submit" id="detail_btn" hidden></button>
-    </form>
-
-    <ul id="nav" style="float: left">
+    <ul id="nav" style="float: left;">
 	    <li>
             <a id="course_type" type="text" onclick="submitAll()">
                 请选择要查询的课程类型
@@ -155,6 +125,32 @@
             <button type="button" id="name_btn" onclick="submitAll()"></button>
         </form>
     </div>
+    <div class="search bar7" style="float: right">
+        <form action="/index/" method="get">
+            <input type="text" id="course_teacher" onchange='changeTeacher(this)' placeholder="请输入您要搜索的教师名">
+            <input style='display:none' />
+            <button type="button" id="teacher_btn" onclick="submitAll()"></button>
+        </form>
+    </div>
+    <div class="search bar7" style="float: right">
+        <form action="/index/" method="get">
+            <input type="text" id="course_college" onchange='changeCollege(this)' placeholder="请输入要搜索的授课学院">
+            <input style='display:none' />
+            <button type="button" id="college_btn" onclick="submitAll()"></button>
+        </form>
+    </div>
+    <form action="/index/" method="get">
+        <input type="text" id="hidden_type" name="course_type" hidden>
+        <input type="text" id="hidden_college" name="course_college" hidden>
+        <input type="text" id="hidden_teacher" name="course_teacher" hidden>
+        <input type="text" id="hidden_name" name="course_name" hidden>
+        <button type="submit" id="hidden_btn" hidden></button>
+    </form>
+
+    <form action="/detail/" method="get">
+        <input type="text" id="detail_id" name="detail_id" hidden>
+        <button type="submit" id="detail_btn" hidden></button>
+    </form>
 
     <table class="bordered">
         <thead>
@@ -201,12 +197,14 @@
 
     {% paginate %}
 	
-	<form action="/index/" method="post" hidden>
+	<form action="/index/" method="post" target="iframe_id" hidden>
 		{% csrf_token %}
 		<input type="text" id = "star_id" name="star_id"/>
 		<input type="text" id = "decision_id" name="decision_id"/>
 		<button type="submit" id="star_btn"></button>
     </form>
+    
+    <iframe id="iframe_id" name="iframe_id" style="display:none;"></iframe>
 	
 </div>
 

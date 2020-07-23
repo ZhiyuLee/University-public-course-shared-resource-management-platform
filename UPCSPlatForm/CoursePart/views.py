@@ -33,6 +33,7 @@ def index(request):
             add_favor(request.session.get('user_id'), request.POST.get('star_id'))
         else:
             delete_favor(request.session.get('user_id'), request.POST.get('star_id'))
+        return redirect('/index/')
     # all_course = get_all_courses()
     user = user_view.query_by_id(request.session.get('user_id'))
     stars = get_favorite_list(user)
@@ -78,15 +79,14 @@ def delete_by_id(course_id):
     models.Course.delete(course)
 
 
-# 课程号, 课程名, 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
-def add_course(course_id, course_name,
+# 课程名, 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
+def add_course(course_name,
                course_type, course_teacher,
                course_collage, course_credit,
                course_time):
     new_course = models.Course()
     new_course.college = course_collage
     new_course.credit = course_credit
-    new_course.ID = course_id
     new_course.name = course_name
     new_course.teacherName = course_teacher
     new_course.time = course_time
