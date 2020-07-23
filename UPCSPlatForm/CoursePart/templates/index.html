@@ -27,8 +27,8 @@
             submit_name.value = thisElement.value;
         }
 
-        function changeID(thisElement) {
-            let submit_type = document.getElementById("hidden_id");
+        function changeCollege(thisElement) {
+            let submit_type = document.getElementById("hidden_college");
             submit_type.value = thisElement.value;
         }
 
@@ -41,7 +41,7 @@
             let type_btn = document.getElementById('hidden_btn');
             let name_btn = document.getElementById('name_btn');
             let teacher_btn = document.getElementById('teacher_btn');
-            let id_btn = document.getElementById('id_btn');
+            let id_btn = document.getElementById('college_btn');
             type_btn.click();
             type_btn.onsubmit(function(){teacher_btn.click()});
             teacher_btn.onsubmit(function(){name_btn.click()});
@@ -69,9 +69,10 @@
             let detail = document.getElementById("detail_id");
             detail.value = id;
             let detail_btn = document.getElementById("detail_btn");
-            detail_btn.click();            
+            detail_btn.click();
         }
-        function star(courseid) {
+		
+		function star(courseid) {
             var str = courseid.toString();
             var starId = str.concat("star");
             var staredId = str.concat("stared");
@@ -88,11 +89,13 @@
             else{
                 document.getElementById(starId).style.display = "block";
                 document.getElementById(staredId).style.display = "none";
-                desicion.value = 'cancel';
+                decision.value = 'cancel';
                 star_btn.click();
             }
         }
+		
     {% endblock %}
+
 {% block content %}
 
 <div class="header" id="head"  >
@@ -112,15 +115,15 @@
 
     <div class="search bar7" style="float: right">
         <form action="/index/" method="get">
-            <input type="text" id="course_id" onchange='changeID(this)' placeholder="请输入您要搜索的课程号">
+            <input type="text" id="course_college" onchange='changeCollege(this)' placeholder="请输入要搜索的授课学院">
             <input style='display:none' />
-            <button type="button" id="id_btn" onclick="submitAll()"></button>
+            <button type="button" id="college_btn" onclick="submitAll()"></button>
         </form>
     </div>
 
     <form action="/index/" method="get">
         <input type="text" id="hidden_type" name="course_type" hidden>
-        <input type="text" id="hidden_id" name="course_id" hidden>
+        <input type="text" id="hidden_college" name="course_college" hidden>
         <input type="text" id="hidden_teacher" name="course_teacher" hidden>
         <input type="text" id="hidden_name" name="course_name" hidden>
         <button type="submit" id="hidden_btn" hidden></button>
@@ -137,10 +140,10 @@
                 请选择要查询的课程类型
             </a>
 	    	<ul>
-                <li><a onclick='changeType(this)'>公共基础必修</a></li>
-                <li><a onclick='changeType(this)'>公共基础选修</a></li>
-                <li><a onclick='changeType(this)'>通识教育必修</a></li>
-                <li><a onclick='changeType(this)'>通识教育选修</a></li>
+                <li><a onclick='changeType(this)'>社会科学与现代社会</a></li>
+                <li><a onclick='changeType(this)'>科学精神与生命关怀</a></li>
+                <li><a onclick='changeType(this)'>艺术体验与审美鉴赏</a></li>
+                <li><a onclick='changeType(this)'>中华文化与世界文明</a></li>
 		    </ul>
 	    </li>
     </ul>
@@ -156,14 +159,13 @@
     <table class="bordered">
         <thead>
             <tr>
-                <th>课程号</th>
+                <th>编号</th>
                 <th>课程名</th>
                 <th>课程类别</th>
                 <th>授课教师</th>
                 <th>授课学院</th>
                 <th>课程学分</th>
-                <th>学时安排</th>
-                <th>收藏</th> 
+                <th>收藏</th>
             </tr>
         </thead>
         {% autopaginate courses 10 as thisPageCourses %}
@@ -175,26 +177,37 @@
             <td onclick="gotoDetail({{ course.ID }})">{{ course.teacherName }}</td>
             <td onclick="gotoDetail({{ course.ID }})">{{ course.college }}</td>
             <td onclick="gotoDetail({{ course.ID }})">{{ course.credit }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.time }}</td>
             <td>
+                {% if course in stars %}
+                <span style=" text-align:center;display:none" onclick="star({{ course.ID }})"id = "{{ course.ID }}star">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </span>
+                <span  style=" text-align:center;display:block" onclick="star({{ course.ID }})"id = "{{ course.ID }}stared">
+                    <i class="fa fa-star" aria-hidden="true"></i>
+                </span>
+                {% else %}
                 <span style=" text-align:center;display:block" onclick="star({{ course.ID }})"id = "{{ course.ID }}star">
                     <i class="fa fa-star-o" aria-hidden="true"></i>
                 </span>
                 <span  style=" text-align:center;display:none" onclick="star({{ course.ID }})"id = "{{ course.ID }}stared">
                     <i class="fa fa-star" aria-hidden="true"></i>   
-                </span>                
+                </span>
+                {% endif %}
             </td>
         </tr>
         {% endfor %}
-        <form action="/star/" method="post">
-            {% csrf_token %}
-            <input type="text" id = "star_id" name="star_id"/>
-            <input type="text" id = "decision_id" name="decision_id"/>
-            <button type="submit" id="star_btn"></button>
-        </form>
+
     </table>
 
     {% paginate %}
+	
+	<form action="/index/" method="post" hidden>
+		{% csrf_token %}
+		<input type="text" id = "star_id" name="star_id"/>
+		<input type="text" id = "decision_id" name="decision_id"/>
+		<button type="submit" id="star_btn"></button>
+    </form>
+	
 </div>
 
 {% endblock %}

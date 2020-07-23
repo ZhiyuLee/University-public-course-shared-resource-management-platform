@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pagination_tags %}
+
+    {% block title %}我的收藏{% endblock %}
+
+    {% block css %}
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="{% static 'css/table.css' %}" rel="stylesheet"/>
+    <link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+    {% endblock %}
+
+    {% block js %}
+
+        function gotoDetail(id) {
+            let detail = document.getElementById("detail_id");
+            detail.value = id;
+            let detail_btn = document.getElementById("detail_btn");
+            detail_btn.click();
+        }
+    {% endblock %}
+
+
+{% block content %}
+
+<div class="header" id="head"  >
+    <div class="title" style="text-align: center;"><h1>我的收藏</h1></div>
+</div>
+
+<div id="container" >
+
+    <form action="/detail/" method="get">
+        <input type="text" id="detail_id" name="detail_id" hidden>
+        <button type="submit" id="detail_btn" hidden></button>
+    </form>
+
+    <center>
+        <table class="bordered" style="width: 900px;">
+            <thead>
+                <tr>
+                    <th>编号</th>
+                    <th>课程名</th>
+                    <th>课程类别</th>
+                    <th>授课教师</th>
+                    <th>授课学院</th>
+                    <th>课程学分</th>
+                </tr>
+            </thead>
+            {% autopaginate courses 10 as thisPageCourses %}
+            {% for course in thisPageCourses %}
+            <tr>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.ID }}</td>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.name }}</td>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.type }}</td>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.teacherName }}</td>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.college }}</td>
+                <td onclick="gotoDetail({{ course.ID }})">{{ course.credit }}</td>
+            </tr>
+            {% endfor %}
+
+        </table>
+
+        {% paginate %}
+        </center>
+	
+    </div>
+
+{% endblock %}
