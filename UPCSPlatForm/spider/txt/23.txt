@@ -1,26 +1,39 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html>
- <head>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type"/>
-  <meta content="text/css" http-equiv="Content-Style-Type"/>
-  <title>
-   选课界面
-  </title>
-  <link href="../css/style_common.css?v=2.002" rel="stylesheet" type="text/css"/>
-  <link href="../css/tab.css?v=2.002" rel="stylesheet" type="text/css"/>
-  <script src="../js/jquery.tools.min.js" type="text/javascript">
-  </script>
-  <script src="../js/table.js?v=2.002" type="text/javascript">
-  </script>
-  <script src="../js/customControl.js?v=2.002" type="text/javascript">
-  </script>
-  <script src="../js/jquery.i18n.properties.js" type="text/javascript">
-  </script>
-  <script src="../js/languageSub.js" type="text/javascript">
-  </script>
-  <meta content="lessonCommon-lessonSelect-personalInfo" id="i18n_pagename"/>
-  <script type="text/javascript">
-   <!--
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<title>选课界面</title>
+
+<link rel="stylesheet" type="text/css" href="../css/style_common.css?v=2.002"/>
+<link rel="stylesheet" type="text/css" href="../css/tab.css?v=2.002"/>
+
+<script type="text/javascript" src="../js/jquery.tools.min.js"></script>
+<script type="text/javascript" src="../js/table.js?v=2.002"></script>
+<script type="text/javascript" src="../js/customControl.js?v=2.002"></script>
+<script type="text/javascript" src="../js/jquery.i18n.properties.js"></script>
+<script type="text/javascript" src="../js/languageSub.js"></script>
+<meta id="i18n_pagename" content="lessonCommon-lessonSelect-personalInfo">
+
+<script type="text/javascript"><!--
 // perform JavaScript after the document is scriptable.
 $(function() {
 
@@ -71,10 +84,10 @@ $(function() {
 		}
   	});
 });
--->
-  </script>
-  <script type="text/javascript">
-   // perform JavaScript after the document is scriptable.
+--></script>
+
+<script type="text/javascript">
+// perform JavaScript after the document is scriptable.
 /*
 lessonName:课程名
 credit:学分
@@ -123,10 +136,12 @@ lessonNameEng = $(lessonNameEng).parent().find('.lessonNameEng').text();
 		customAlert("Sorry, you have already chosen this course！ ","Course selection tips:");}
 	else {customAlert("Sorry, you can only choose up to 6 elective courses at a time！","Course selection tips:")};
 	}
-}
-  </script>
-  <style>
-   .tooltip {
+}
+
+</script>
+
+<style>
+.tooltip {
 	z-index:600;
     display:none;
     background-color:gray;
@@ -191,946 +206,855 @@ table td,th {
 	font-size: 14px;
 	color: #FFF;
 	display: none;
-}
-  </style>
- </head>
- <body style="background-color:transparent">
-  <form action="choose_PubLsn_list.jsp" method="post">
-   <div id="searchBox">
-    <span class="i18n" name="college">
-     校区
-    </span>
-    <select class="input" name="XiaoQu" style="width:60px;">
-     <option class="i18n" name="allSchool" selected="" value="0">
-      全校
-     </option>
-     <option class="i18n" name="oneCampus" value="1">
-      1区
-     </option>
-     <option class="i18n" name="twoCampus" value="2">
-      2区
-     </option>
-     <option class="i18n" name="thirdCampus" value="3">
-      3区
-     </option>
-     <option class="i18n" name="forthCampus" value="4">
-      4区
-     </option>
-    </select>
-    <span class="i18n" name="lesson_credit">
-     学分
-    </span>
-    <select class="input" name="credit" style="width:60px;">
-     <option class="i18n" name="allCredit" selected="" value="0">
-      所有
-     </option>
-     <option value="0.5">
-      0.5
-     </option>
-     <option value="1.0">
-      1.0
-     </option>
-     <option value="1.5">
-      1.5
-     </option>
-     <option value="2.0">
-      2.0
-     </option>
-     <option value="2.5">
-      2.5
-     </option>
-     <option value="3.0">
-      3.0
-     </option>
-     <option value="4.0">
-      4.0
-     </option>
-    </select>
-    <input id="cx" name="keyword" onblur="if (value ==''){value='课程名/教师名'}" onfocus="if (value =='课程名/教师名'){value =''}" style="color:#696969" type="text" value="课程名/教师名"/>
-    <input class="searchBtb" name="submit" onclick="addTimestampZh()" type="submit" value="查询"/>
-    <input hidden="" name="timestamp" type="text" value="1594893967408"/>
-    <!--    <a href="../stu/chooseLsnaaaa.html" target="_blank" class="a_btn" >查看选课规则</a>	       -->
-   </div>
-  </form>
-  <div class="tipInfo i18n" data-lang-args="2019~2020~2" name="lesson_inquireRange">
-   *查询范围：2019到2020学年2学期的课程
-  </div>
-  <table class="table listTable" style="table-layout: fixed;" width="100%">
-   <tr>
-    <th class="i18n" name="lesson_lessonName">
-     课程名
-    </th>
-    <th class="i18n" name="lesson_credit" style="width:30px;">
-     学分
-    </th>
-    <th class="i18n" name="lesson_leftMax" style="width:80px;">
-     剩余/最大人数
-    </th>
-    <th class="i18n" name="lesson_lessonTeacher" style="width:60px;">
-     教师
-    </th>
-    <th class="i18n" name="lesson_jobTitle" style="width:55px;">
-     职称
-    </th>
-    <th class="i18n" name="lesson_teachingCollege" style="width:100px;">
-     授课学院
-    </th>
-    <th class="i18n" name="lesson_fieldname" style="width:80px;">
-     领域
-    </th>
-    <th class="i18n" name="lesson_year" style="width:40px;">
-     学年
-    </th>
-    <th class="i18n" name="lesson_term" style="width:40px;">
-     学期
-    </th>
-    <th class="i18n" name="lesson_timeAndPlace" style="text-align:center;">
-     上课时间地点详细
-    </th>
-    <th class="i18n" name="lesson_note" style="width:130px;">
-     备注
-    </th>
-    <th class="i18n" name="lesson_select" style="width:75px;">
-     选课
-    </th>
-    <!--<th style="width:75px;" class="i18n" name="lesson_calendar">教学日历下载</th>-->
-    <th class="i18n" name="lesson_operation" style="width:75px;">
-     操作
-    </th>
-   </tr>
-   <!-- 显示已选课程的数据 -->
-   <tr>
-    <td style=" word-wrap:break-word;">
-     世界文明史
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      6
-     </font>
-     /90
-    </td>
-    <td>
-     潘迎春
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     历史学院
-    </td>
-    <td>
-     中华文化与世界文明
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192029099                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="核心通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192029099                     " lessonname="世界文明史" lessonnum="2321150011011" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     青铜器鉴赏??从希腊罗马到古代中国
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      4
-     </font>
-     /90
-    </td>
-    <td>
-     张昌平
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     历史学院
-    </td>
-    <td>
-     中华文化与世界文明
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192029101                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192029101                     " lessonname="青铜器鉴赏??从希腊罗马到古代中国" lessonnum="2331150011063" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     简明世界史（一）
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      13
-     </font>
-     /90
-    </td>
-    <td>
-     潘迎春
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     历史学院
-    </td>
-    <td>
-     中华文化与世界文明
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192029102                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192029102                     " lessonname="简明世界史（一）  " lessonnum="2331150014058" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="慕课" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     国际组织专题
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      66
-     </font>
-     /80
-    </td>
-    <td>
-     刘晓莉
-    </td>
-    <td>
-     副教授
-    </td>
-    <td>
-     历史学院
-    </td>
-    <td>
-     社会科学与现代社会
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192029103                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192029103                     " lessonname="国际组织专题" lessonnum="2334150011148" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     摄影艺术与摄影流派
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      7
-     </font>
-     /40
-    </td>
-    <td>
-     侯晓艳
-    </td>
-    <td>
-     讲师
-    </td>
-    <td>
-     新闻与传播学院
-    </td>
-    <td>
-     艺术体验与审美鉴赏
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192003567                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192003567                     " lessonname="摄影艺术与摄影流派" lessonnum="2332140011332" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     媒介素养
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      21
-     </font>
-     /130
-    </td>
-    <td>
-     强月新
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     新闻与传播学院
-    </td>
-    <td>
-     社会科学与现代社会
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192003564                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="核心通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192003564                     " lessonname="媒介素养" lessonnum="2324140011019" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     广告设计创新思维与制作
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      10
-     </font>
-     /130
-    </td>
-    <td>
-     刘艺琴
-    </td>
-    <td>
-     讲师
-    </td>
-    <td>
-     新闻与传播学院
-    </td>
-    <td>
-     艺术体验与审美鉴赏
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192003569                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="是" isspecify="否" lessonheadid="20192003569                     " lessonname="广告设计创新思维与制作  " lessonnum="4332140011197" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     经典广告案例赏析
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      0
-     </font>
-     /130
-    </td>
-    <td>
-     王晔
-    </td>
-    <td>
-     讲师
-    </td>
-    <td>
-     新闻与传播学院
-    </td>
-    <td>
-     艺术体验与审美鉴赏
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192003566                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192003566                     " lessonname="经典广告案例赏析" lessonnum="2332140011198" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     战略传播概论
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      74
-     </font>
-     /130
-    </td>
-    <td>
-     余晓莉
-    </td>
-    <td>
-     讲师
-    </td>
-    <td>
-     新闻与传播学院
-    </td>
-    <td>
-     社会科学与现代社会
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192003570                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="是" isspecify="否" lessonheadid="20192003570                     " lessonname="战略传播概论" lessonnum="4334140011307" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     近现代日本社会与文化
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      28
-     </font>
-     /100
-    </td>
-    <td>
-     李圣杰
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     外国语言文学学院
-    </td>
-    <td>
-     中华文化与世界文明
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192002940                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192002940                     " lessonname="近现代日本社会与文化  " lessonnum="2331130011050" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     中日文化交流史话
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      6
-     </font>
-     /100
-    </td>
-    <td>
-     夏晶
-    </td>
-    <td>
-     副教授
-    </td>
-    <td>
-     外国语言文学学院
-    </td>
-    <td>
-     中华文化与世界文明
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192002941                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="" class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192002941                     " lessonname="中日文化交流史话  " lessonnum="2331130011053" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     世界桥梁建筑艺术赏析
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      23
-     </font>
-     /100
-    </td>
-    <td>
-     万臻
-    </td>
-    <td>
-     副教授
-    </td>
-    <td>
-     土木建筑工程学院
-    </td>
-    <td>
-     艺术体验与审美鉴赏
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192020944                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192020944                     " lessonname="世界桥梁建筑艺术赏析  " lessonnum="2332430011209" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     道路桥梁工程导论
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      72
-     </font>
-     /80
-    </td>
-    <td>
-     王书法
-    </td>
-    <td>
-     副教授
-    </td>
-    <td>
-     土木建筑工程学院
-    </td>
-    <td>
-     科学精神与生命关怀
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192020941                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192020941                     " lessonname="道路桥梁工程导论" lessonnum="2333430011094" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="中文" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     景观地学与欣赏
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      72
-     </font>
-     /99
-    </td>
-    <td>
-     刘小燕
-    </td>
-    <td>
-     副教授
-    </td>
-    <td>
-     土木建筑工程学院
-    </td>
-    <td>
-     科学精神与生命关怀
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192020948                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192020948                     " lessonname="景观地学与欣赏" lessonnum="2333430011278" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-   <tr>
-    <td style=" word-wrap:break-word;">
-     核电站与环境安全
-    </td>
-    <td>
-     2.0
-    </td>
-    <td>
-     <font color="#FF0000">
-      81
-     </font>
-     /90
-    </td>
-    <td>
-     郑烨炜
-    </td>
-    <td>
-     教授
-    </td>
-    <td>
-     土木建筑工程学院
-    </td>
-    <td>
-     科学精神与生命关怀
-    </td>
-    <td>
-     2019
-    </td>
-    <td>
-     2
-    </td>
-    <td>
-     <div class="overflow">
-     </div>
-    </td>
-    <td>
-     <div class="overflow">
-      无
-     </div>
-    </td>
-    <td>
-     <input class="btn i18n-input" disabled="" id="20192020954                     " selectname="lesson_select" title="选课暂未开放，请在通知的时间段内选课！" type="button" value="选课">
-     </input>
-    </td>
-    <td>
-     <input address="" bookname="自编                                                                                                                          " class="btn i18n-input" commontype="一般通识" credit="2.0" hour="32" hour_exp="0" hour_mac="0" introduce="" iscreative="否" isspecify="否" lessonheadid="20192020954                     " lessonname="核电站与环境安全" lessonnum="2333430011280" name="detail" note="" plantype="通识教育选修" practice_credit="0.0" selectname="detail" style="padding:0px" teachtype="" throry_credit="2.0" type="button" value="查看详情"/>
-    </td>
-    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
-   </tr>
-  </table>
-  <div class="page_nav">
-   <div class="total_count">
-    共有
-    <span style="color:red;">
-     373
-    </span>
-    条记录 第23/25页
-    <a class="menu" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=1">
-     首页
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=22">
-     &lt;上一页
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=1">
-     1
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=2">
-     2
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=3">
-     3
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=4">
-     4
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=5">
-     5
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=6">
-     6
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=7">
-     7
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=8">
-     8
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=9">
-     9
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=10">
-     10
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=11">
-     11
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=12">
-     12
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=13">
-     13
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=14">
-     14
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=15">
-     15
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=16">
-     16
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=17">
-     17
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=18">
-     18
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=19">
-     19
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=20">
-     20
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=21">
-     21
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=22">
-     22
-    </a>
-    23
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=24">
-     24
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=25">
-     25
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=24">
-     下一页 &gt;
-    </a>
-    <a class="navegate" href="choose_PubLsn_list.jsp?XiaoQu=0&amp;credit=0&amp;keyword=&amp;pageNum=25">
-     尾页
-    </a>
-   </div>
-  </div>
-  <!--弹框内容-->
-  <div class="black_overlay" id="fade" style="display: none;
+}
+
+</style>
+</head>
+<body style="background-color:transparent">
+
+	    
+    	<form action="choose_PubLsn_list.jsp" method="post" >
+    	
+	    	<div id="searchBox" >
+	           <span class="i18n" name="college">校区</span>&nbsp;
+	            <select name="XiaoQu" class="input" style="width:60px;">
+	                <option value ="0" selected class="i18n" name="allSchool">全校</option>
+					<option value ="1"  class="i18n" name="oneCampus">1区</option>
+					<option value ="2"  class="i18n" name="twoCampus">2区</option>
+					<option value ="3"  class="i18n" name="thirdCampus">3区</option>
+					<option value ="4"  class="i18n" name="forthCampus">4区</option>
+	            </select>&nbsp;&nbsp;
+	            <span class="i18n" name="lesson_credit">学分</span>&nbsp;
+	            <select name="credit" class="input" style="width:60px;">
+	                <option  value ="0" selected  class="i18n" name="allCredit">所有</option>
+	                
+	                <option  value =0.5 >0.5</option>
+
+	                 
+	                <option  value =1.0 >1.0</option>
+
+	                 
+	                <option  value =1.5 >1.5</option>
+
+	                 
+	                <option  value =2.0 >2.0</option>
+
+	                 
+	                <option  value =2.5 >2.5</option>
+
+	                 
+	                <option  value =3.0 >3.0</option>
+
+	                 
+	                <option  value =4.0 >4.0</option>
+
+	                 
+	            </select>&nbsp;&nbsp;
+	                
+	            <input style="color:#696969" name="keyword" type="text" id="cx" value='课程名/教师名' onfocus="if (value =='课程名/教师名'){value =''}" onblur="if (value ==''){value='课程名/教师名'}" />
+	            <input type="submit" name="submit" class="searchBtb "  value="查询" onclick="addTimestampZh()"/>
+	      		
+				<input type="text" name="timestamp" value="1595491994116" hidden>
+	       <!--    <a href="../stu/chooseLsnaaaa.html" target="_blank" class="a_btn" >查看选课规则</a>	       -->
+	        </div>
+        </form>
+
+	    <div class="tipInfo i18n" name="lesson_inquireRange" data-lang-args="2019~2020~2">
+           *查询范围：2019到2020学年2学期的课程
+    	</div>
+<table class="table listTable" style="table-layout: fixed;" width="100%">
+	<tr>
+		<th class="i18n" name="lesson_lessonName">课程名</th>
+		<th style="width:30px;" class="i18n" name="lesson_credit">学分</th>
+		<th style="width:80px;" class="i18n" name="lesson_leftMax">剩余/最大人数</th>
+		<th style="width:60px;" class="i18n" name="lesson_lessonTeacher">教师</th>
+		<th style="width:55px;" class="i18n" name="lesson_jobTitle">职称</th>
+		<th style="width:100px;" class="i18n" name="lesson_teachingCollege">授课学院</th>
+		<th style="width:80px;" class="i18n" name="lesson_fieldname">领域</th>
+		<th style="width:40px;" class="i18n" name="lesson_year">学年</th>
+		<th style="width:40px;" class="i18n" name="lesson_term">学期</th>
+		<th style="width:150px;" style="text-align:center;" class="i18n" name="lesson_timeAndPlace">上课时间地点详细</th>
+		<th style="width:130px;" class="i18n" name="lesson_note">备注</th>
+		<th style="width:75px;" class="i18n" name="lesson_select">选课</th>
+		<!--<th style="width:75px;" class="i18n" name="lesson_calendar">教学日历下载</th>-->
+		<th style="width:75px;" class="i18n" name="lesson_operation">操作</th>
+	</tr>
+
+  <!-- 显示已选课程的数据 -->
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">世界文明史</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">6</font>/90</td>
+    <td >潘迎春</td>
+    <td>教授</td>
+    <td>历史学院</td>
+    <td >中华文化与世界文明</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192029099                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192029099                     " lessonNum="2321150011011" lessonName="世界文明史"
+	plantype="通识教育选修" commontype="核心通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">青铜器鉴赏??从希腊罗马到古代中国</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">4</font>/90</td>
+    <td >张昌平</td>
+    <td>教授</td>
+    <td>历史学院</td>
+    <td >中华文化与世界文明</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192029101                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192029101                     " lessonNum="2331150011063" lessonName="青铜器鉴赏??从希腊罗马到古代中国"
+	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">简明世界史（一）  </td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">13</font>/90</td>
+    <td >潘迎春</td>
+    <td>教授</td>
+    <td>历史学院</td>
+    <td >中华文化与世界文明</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192029102                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192029102                     " lessonNum="2331150014058" lessonName="简明世界史（一）  "
+	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="慕课" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">国际组织专题</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">66</font>/80</td>
+    <td >刘晓莉</td>
+    <td>副教授</td>
+    <td>历史学院</td>
+    <td >社会科学与现代社会</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192029103                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192029103                     " lessonNum="2334150011148" lessonName="国际组织专题"
+	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">摄影艺术与摄影流派</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">7</font>/40</td>
+    <td >侯晓艳</td>
+    <td>讲师</td>
+    <td>新闻与传播学院</td>
+    <td >艺术体验与审美鉴赏</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192003567                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192003567                     " lessonNum="2332140011332" lessonName="摄影艺术与摄影流派"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">媒介素养</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">21</font>/130</td>
+    <td >强月新</td>
+    <td>教授</td>
+    <td>新闻与传播学院</td>
+    <td >社会科学与现代社会</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192003564                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192003564                     " lessonNum="2324140011019" lessonName="媒介素养"
+	plantype="通识教育选修" commontype="核心通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">广告设计创新思维与制作  </td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">10</font>/130</td>
+    <td >刘艺琴</td>
+    <td>讲师</td>
+    <td>新闻与传播学院</td>
+    <td >艺术体验与审美鉴赏</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192003569                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192003569                     " lessonNum="4332140011197" lessonName="广告设计创新思维与制作  "
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="是" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">经典广告案例赏析</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">0</font>/130</td>
+    <td >王晔</td>
+    <td>讲师</td>
+    <td>新闻与传播学院</td>
+    <td >艺术体验与审美鉴赏</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192003566                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192003566                     " lessonNum="2332140011198" lessonName="经典广告案例赏析"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">战略传播概论</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">74</font>/130</td>
+    <td >余晓莉</td>
+    <td>讲师</td>
+    <td>新闻与传播学院</td>
+    <td >社会科学与现代社会</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192003570                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192003570                     " lessonNum="4334140011307" lessonName="战略传播概论"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="" isspecify="否" iscreative="是" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">近现代日本社会与文化  </td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">28</font>/100</td>
+    <td >李圣杰</td>
+    <td>教授</td>
+    <td>外国语言文学学院</td>
+    <td >中华文化与世界文明</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192002940                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192002940                     " lessonNum="2331130011050" lessonName="近现代日本社会与文化  "
+	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">中日文化交流史话  </td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">6</font>/100</td>
+    <td >夏晶</td>
+    <td>副教授</td>
+    <td>外国语言文学学院</td>
+    <td >中华文化与世界文明</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192002941                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192002941                     " lessonNum="2331130011053" lessonName="中日文化交流史话  "
+	plantype="通识教育选修" commontype="一般通识" bookName="" credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">世界桥梁建筑艺术赏析  </td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">23</font>/100</td>
+    <td >万臻</td>
+    <td>副教授</td>
+    <td>土木建筑工程学院</td>
+    <td >艺术体验与审美鉴赏</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192020944                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192020944                     " lessonNum="2332430011209" lessonName="世界桥梁建筑艺术赏析  "
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">道路桥梁工程导论</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">72</font>/80</td>
+    <td >王书法</td>
+    <td>副教授</td>
+    <td>土木建筑工程学院</td>
+    <td >科学精神与生命关怀</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192020941                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192020941                     " lessonNum="2333430011094" lessonName="道路桥梁工程导论"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="中文" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">景观地学与欣赏</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">72</font>/99</td>
+    <td >刘小燕</td>
+    <td>副教授</td>
+    <td>土木建筑工程学院</td>
+    <td >科学精神与生命关怀</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192020948                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192020948                     " lessonNum="2333430011278" lessonName="景观地学与欣赏"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+  <tr>
+    
+
+    <td  style=" word-wrap:break-word;">核电站与环境安全</td>
+    
+     <td>2.0</td>
+     <td><font color="#FF0000">81</font>/90</td>
+    <td >郑烨炜</td>
+    <td>教授</td>
+    <td>土木建筑工程学院</td>
+    <td >科学精神与生命关怀</td>
+    <td >2019</td>
+     <td >2</td>
+    
+    
+
+    
+ 
+    <td >
+	    <div class="overflow">
+	    	
+		</div>
+		
+	</td>
+    <td >
+	    <div class="overflow">
+		    无
+		</div>
+		
+    </td>
+    <td>
+    
+    <input type="button" class="btn i18n-input" selectname="lesson_select" value="选课" title="选课暂未开放，请在通知的时间段内选课！" id="20192020954                     " disabled />
+    
+    </td>
+	<td>
+	
+	<input  type="button" style="padding:0px" class="btn i18n-input  " selectname="detail" name="detail" value="查看详情"
+	lessonHeadId="20192020954                     " lessonNum="2333430011280" lessonName="核电站与环境安全"
+	plantype="通识教育选修" commontype="一般通识" bookName="自编                                                                                                                          " credit="2.0"
+	throry_credit="2.0" practice_credit="0.0" hour="32" hour_exp="0"
+	hour_mac="0" teachtype="" isspecify="否" iscreative="否" note="" introduce="" address="">
+	</td>
+    <!-- <TD height="25" nowrap>成绩已存档</TD>-->
+
+    
+	
+    
+  </tr>
+
+  
+
+</table>
+
+<div class="page_nav">
+	<div class="total_count">共有<span style='color:red;'>373</span>条记录 第23/25页&nbsp;&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=1" class="menu">首页</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=22" class="navegate"> &lt;上一页</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=1" class="navegate">1</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=2" class="navegate">2</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=3" class="navegate">3</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=4" class="navegate">4</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=5" class="navegate">5</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=6" class="navegate">6</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=7" class="navegate">7</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=8" class="navegate">8</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=9" class="navegate">9</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=10" class="navegate">10</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=11" class="navegate">11</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=12" class="navegate">12</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=13" class="navegate">13</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=14" class="navegate">14</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=15" class="navegate">15</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=16" class="navegate">16</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=17" class="navegate">17</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=18" class="navegate">18</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=19" class="navegate">19</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=20" class="navegate">20</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=21" class="navegate">21</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=22" class="navegate">22</a>&nbsp;23&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=24" class="navegate">24</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=25" class="navegate">25</a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=24" class="navegate">下一页 &gt; </a>&nbsp;<a href="choose_PubLsn_list.jsp?XiaoQu=0&credit=0&keyword=&pageNum=25" class="navegate">尾页</a></div>
+</div>
+<!--弹框内容-->
+<div id="fade" class="black_overlay" style="display: none;
 	position: absolute;
 	top: 0%;
 	left: 0%;
@@ -1140,9 +1064,8 @@ table td,th {
 	z-index:1001;
 	-moz-opacity: 0.8;
 	opacity:0.3;
-	filter: alpha(opacity=50);">
-  </div>
-  <div class="white_content" id="MyDiv" style="display: none;
+	filter: alpha(opacity=50);"></div>
+<div id="MyDiv" class="white_content" style="display: none;
     position: absolute;
     top: 20%;
     left: 20%;
@@ -1150,121 +1073,71 @@ table td,th {
     height:400px;
     border: 2px solid #d3d3d3;
     background-color: white;
-    z-index: 1002;">
-   <div id="close" style="text-align: right; cursor: default; margin-top:10px;margin-bottom:10px;">
-    <span style="font-size: 13px; margin-right: 17px; color: #333333; font-weight: 300;cursor:pointer;">
-     关闭
-    </span>
-   </div>
-   <h3 class="i18n" name="courseDetail">
-    课程详情
-   </h3>
-   <table class="table listTable" id="detailTable">
-    <tr class="TR_TITLE" height="20">
-     <td class="i18n" name="lesson_lessonHead" width="10%">
-      课头号
-     </td>
-     <td colspan="2" name="lessonHeadId" width="30%">
-     </td>
-     <td class="i18n" name="lesson_lessonNum" width="13%">
-      课程号
-     </td>
-     <td colspan="2" name="lessonNum" width="33%">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_lessonName" width="10%">
-      课程名
-     </td>
-     <td colspan="5" name="lessonName" width="">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_lessonType" width="10%">
-      课程类型
-     </td>
-     <td colspan="1" name="plantype" width="16%">
-     </td>
-     <td class="i18n" name="lesson_commontype" width="14%">
-      通识课类型
-     </td>
-     <td colspan="1" name="commontype" width="13%">
-     </td>
-     <td class="i18n" name="lesson_textbook" width="13%">
-      教材
-     </td>
-     <td colspan="1" name="bookName" width="20%">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_creditTotal" width="">
-      总学分
-     </td>
-     <td colspan="1" name="credit" width="">
-     </td>
-     <td class="i18n" name="lesson_throry_credit" width="">
-      理论学分
-     </td>
-     <td colspan="1" name="throry_credit" width="">
-     </td>
-     <td class="i18n" name="lesson_practice_credit" width="">
-      实践学分
-     </td>
-     <td colspan="1" name="practice_credit" width="">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_hour" width="">
-      理论学时
-     </td>
-     <td colspan="1" name="hour" width="">
-     </td>
-     <td class="i18n" name="lesson_hour_exp" width="">
-      实践学时
-     </td>
-     <td colspan="1" name="hour_exp" width="">
-     </td>
-     <td class="i18n" name="lesson_hour_mac" width="">
-      上机学时
-     </td>
-     <td colspan="1" name="hour_mac" width="">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_teachtype" width="">
-      授课方式
-     </td>
-     <td colspan="1" name="teachtype" width="">
-     </td>
-     <td class="i18n" name="lesson_isspecify" width="">
-      指定选修
-     </td>
-     <td colspan="1" name="isspecify" width="">
-     </td>
-     <td class="i18n" name="lesson_iscreative" width="">
-      创新创业
-     </td>
-     <td colspan="1" name="iscreative" width="">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" height="60" name="lessonIntro">
-      课程简介
-     </td>
-     <td colspan="5" name="introduce">
-     </td>
-    </tr>
-    <tr class="TR_TITLE">
-     <td class="i18n" name="lesson_note">
-      备注
-     </td>
-     <td colspan="5" name="note">
-     </td>
-    </tr>
-   </table>
-  </div>
-  <script type="text/javascript">
-   $(function() {
+    z-index: 1002;">
+	<div id="close" style="text-align: right; cursor: default; margin-top:10px;margin-bottom:10px;">
+		<span  style="font-size: 13px; margin-right: 17px; color: #333333; font-weight: 300;cursor:pointer;" >关闭</span>
+	</div>
+	<h3 class="i18n" name="courseDetail">课程详情</h3>
+	<table id="detailTable" class="table listTable">
+	<tr class="TR_TITLE" height="20">
+		<td width="10%" class="i18n" name="lesson_lessonHead">课头号</td>
+		<td width="30%" colspan="2" name="lessonHeadId"></td>
+		<td width="13%" class="i18n" name="lesson_lessonNum">课程号</td>
+		<td width="33%" colspan="2" name="lessonNum"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td width="10%" class="i18n" name="lesson_lessonName">课程名</td>
+		<td width="" colspan="5" name="lessonName"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td width="10%" class="i18n" name="lesson_lessonType">课程类型</td>
+		<td width="16%" colspan="1" name="plantype"></td>
+		<td width="14%" class="i18n" name="lesson_commontype">通识课类型</td>
+		<td width="13%" colspan="1" name="commontype"></td>
+		<td width="13%" class="i18n" name="lesson_textbook">教材</td>
+		<td width="20%" colspan="1" name="bookName"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td width="" class="i18n" name="lesson_creditTotal">总学分</td>
+		<td width="" colspan="1" name="credit"></td>
+		<td width="" class="i18n" name="lesson_throry_credit">理论学分</td>
+		<td width="" colspan="1" name="throry_credit"></td>
+		<td width="" class="i18n" name="lesson_practice_credit">实践学分</td>
+		<td width="" colspan="1" name="practice_credit"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td width="" class="i18n" name="lesson_hour">理论学时</td>
+		<td width="" colspan="1" name="hour"></td>
+		<td width="" class="i18n" name="lesson_hour_exp">实践学时</td>
+		<td width="" colspan="1" name="hour_exp"></td>
+		<td width="" class="i18n" name="lesson_hour_mac">上机学时</td>
+		<td width="" colspan="1" name="hour_mac"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td width="" class="i18n" name="lesson_teachtype">授课方式</td>
+		<td width="" colspan="1" name="teachtype"></td>
+		<td width="" class="i18n" name="lesson_isspecify">指定选修</td>
+		<td width="" colspan="1" name="isspecify"></td>
+		<td width="" class="i18n" name="lesson_iscreative">创新创业</td>
+		<td width="" colspan="1" name="iscreative"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td height="60" class="i18n" name="lessonIntro">课程简介</td>
+		<td colspan="5" name="introduce"></td>
+	</tr>
+	<tr class="TR_TITLE">
+		<td class="i18n" name="lesson_note">备注</td>
+		<td colspan="5" name="note"></td>
+	</tr>
+	
+	</table>
+
+
+</div>
+
+
+<script type="text/javascript">
+$(function() {
 	// initialize tooltip
 	$("td[title]").tooltip({
 		position: "center left",
@@ -1357,10 +1230,12 @@ function CloseDiv2()
 {
 	document.getElementById("MyDiv").style.display='none';
 	document.getElementById("fade").style.display='none';
-};
-  </script>
-  <script type="text/javascript">
-   $(function() {
+};
+
+</script>
+
+<script type="text/javascript">
+	$(function() {
 
 		var x = 55;
 		var y = 15;
@@ -1392,12 +1267,13 @@ function CloseDiv2()
 	})
 	function addTimestampZh() {
 		if($(':text').val()=='课程名/教师名') {$(':text').val('')}
-		document.forms[0].timestamp.value = '1594893967409'
+		document.forms[0].timestamp.value = '1595491994117'
            	}
 	function addTimestampEn() {
 		if($(':text').val()=='课程名/教师名') {$(':text').val('')}
-		document.forms[0].timestamp.value = '1594893967409'
-	}
-  </script>
- </body>
-</html>
+		document.forms[0].timestamp.value = '1595491994117'
+	}
+</script>
+
+</body>
+</html>

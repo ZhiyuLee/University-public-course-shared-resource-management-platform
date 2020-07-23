@@ -4,8 +4,7 @@
 # create date:7.18
 # description: 爬取武大教务系统
 
-from django.shortcuts import render
-from . import forms
+from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
 import os
@@ -39,7 +38,7 @@ def spider(Cookies):
         url = root + str(i)
         res2 = s.get(url,headers = headers)    
         #soup = BeautifulSoup(res2.text,'html.parser')
-        filename = "txt\\"+str(i)+'.txt'
+        filename = "spider\\txt\\"+str(i)+'.txt'
         txt_path = os.path.join(path,filename)
         with open(txt_path,'w',encoding='utf-8') as f:
             #f.write(soup.prettify())
@@ -54,9 +53,9 @@ def delete_space():
     i = 1
     page_max = 25
     while i<=page_max:
-        filename = "txt\\"+str(i)+'.txt'
+        filename = "spider\\txt\\"+str(i)+'.txt'
         txt_path = os.path.join(path,filename)
-        filename_re = 'txt\\re'+str(i)+'.txt'
+        filename_re = 'spider\\txt\\re'+str(i)+'.txt'
         txt_path_re = os.path.join(path,filename_re)
         with open (txt_path,'r',encoding='utf-8') as f:    
             with open(txt_path_re,'w',encoding='utf-8') as f_re:                    
@@ -87,7 +86,7 @@ def parser(CourseInfo):
     i = 1
     page_max = 25 
     while i<=page_max:   
-        filename_re = "txt\\re"+str(i)+'.txt'
+        filename_re = "spider\\txt\\re"+str(i)+'.txt'
         txt_path_re = os.path.join(path,filename_re)
         with open (txt_path_re,'r',encoding='utf-8') as f:
             html_doc = f.read()
@@ -146,8 +145,9 @@ def output_excel():
 
 def index(request):
     if request.method == 'POST':
-        cookies_form = forms.CookiesForm(request.POST)
-        Cookies = cookies_form.cleaned_data.get('Cookies')
-    spider(Cookies)
-    output_excel()
+        if not request.user.is_superuser:
+            return redirect('/admin/')
+        Cookies = request.POST.get('Cookies')
+        spider(Cookies)
+        output_excel()
     return render(request,'spider.html')
