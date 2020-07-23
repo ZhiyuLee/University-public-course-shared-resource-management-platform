@@ -69,10 +69,30 @@
             let detail = document.getElementById("detail_id");
             detail.value = id;
             let detail_btn = document.getElementById("detail_btn");
-            detail_btn.click();
+            detail_btn.click();            
+        }
+        function star(courseid) {
+            var str = courseid.toString();
+            var starId = str.concat("star");
+            var staredId = str.concat("stared");
+            var star = document.getElementById("star_id");//收藏课程的id
+            star.value = courseid;
+            var decision = document.getElementById("decision_id");//收藏或者取消收藏            
+            var star_btn =  document.getElementById("star_btn");
+            if(document.getElementById(starId).style.display == "block"){
+                document.getElementById(starId).style.display = "none";
+                document.getElementById(staredId).style.display = "block";     
+                decision.value = 'like';
+                star_btn.click();                
+            }
+            else{
+                document.getElementById(starId).style.display = "block";
+                document.getElementById(staredId).style.display = "none";
+                desicion.value = 'cancel';
+                star_btn.click();
+            }
         }
     {% endblock %}
-
 {% block content %}
 
 <div class="header" id="head"  >
@@ -121,12 +141,6 @@
                 <li><a onclick='changeType(this)'>公共基础选修</a></li>
                 <li><a onclick='changeType(this)'>通识教育必修</a></li>
                 <li><a onclick='changeType(this)'>通识教育选修</a></li>
-                <li><a onclick='changeType(this)'>专业教育必修</a></li>
-                <li><a onclick='changeType(this)'>专业教育选修</a></li>
-                <li><a onclick='changeType(this)'>公共必修</a></li>
-                <li><a onclick='changeType(this)'>公共选修</a></li>
-                <li><a onclick='changeType(this)'>专业必修</a></li>
-                <li><a onclick='changeType(this)'>专业选修</a></li>
 		    </ul>
 	    </li>
     </ul>
@@ -149,21 +163,35 @@
                 <th>授课学院</th>
                 <th>课程学分</th>
                 <th>学时安排</th>
+                <th>收藏</th> 
             </tr>
         </thead>
         {% autopaginate courses 10 as thisPageCourses %}
         {% for course in thisPageCourses %}
-        <tr onclick="gotoDetail({{ course.ID }})">
-            <td>{{ course.ID }}</td>
-            <td>{{ course.name }}</td>
-            <td>{{ course.type }}</td>
-            <td>{{ course.teacherName }}</td>
-            <td>{{ course.college }}</td>
-            <td>{{ course.credit }}</td>
-            <td>{{ course.time }}</td>
+        <tr>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.ID }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.name }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.type }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.teacherName }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.college }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.credit }}</td>
+            <td onclick="gotoDetail({{ course.ID }})">{{ course.time }}</td>
+            <td>
+                <span style=" text-align:center;display:block" onclick="star({{ course.ID }})"id = "{{ course.ID }}star">
+                    <i class="fa fa-star-o" aria-hidden="true"></i>
+                </span>
+                <span  style=" text-align:center;display:none" onclick="star({{ course.ID }})"id = "{{ course.ID }}stared">
+                    <i class="fa fa-star" aria-hidden="true"></i>   
+                </span>                
+            </td>
         </tr>
         {% endfor %}
-
+        <form action="/star/" method="post">
+            {% csrf_token %}
+            <input type="text" id = "star_id" name="star_id"/>
+            <input type="text" id = "decision_id" name="decision_id"/>
+            <button type="submit" id="star_btn"></button>
+        </form>
     </table>
 
     {% paginate %}

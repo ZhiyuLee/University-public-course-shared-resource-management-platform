@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'CoursePart',
     'dj_pagination',
     'CourseComment',
-    'spider'
+    'spider',
+    'Favorites',
 ]
 
 MIDDLEWARE = [

@@ -1,36 +1,36 @@
-# auth:gz
+# auth:gz , lby
 # create date:7.10
+# update date:7.23
 # description:课程部分操作
 
 from django.shortcuts import render
 from CoursePart import models, tests
 import decimal
 from django.shortcuts import render, redirect
+from Favorites.views import delete_favor,add_favor
+
 
 
 def index(request):
     # tests.testCoursePart.test_add_course(self=None)
-    flag_1 = flag_2 = flag_3 = flag_4 = True
     courses = get_all_courses()
     if request.GET.get('course_name') != "" and \
             request.GET.get('course_name') is not None:
         courses = web_query_by_name(courses, request)
-        flag_1 = False
     if request.GET.get('course_id') != "" and \
             request.GET.get('course_id') is not None:
-        flag_2 = False
         courses = web_query_by_id(courses, request)
     if request.GET.get('course_teacher') != "" and \
             request.GET.get('course_teacher') is not None:
         courses = web_query_by_teacher(courses, request)
-        flag_3 = False
     if request.GET.get('course_type') != "" and \
             request.GET.get('course_type') is not None:
         courses = web_query_by_type(courses, request)
-        flag_4 = False
-    if flag_1 and flag_2 and flag_3 and flag_4:
-        # courses = get_all_courses()
-        pass
+    if request.method == 'POST':
+        if request.POST.get('decision_id') == "like":
+            add_favor(request.session.get('user_id'),request.POST.get('star_id'))
+        else:
+            delete_favor(request.session.get('user_id'),request.POST.get('star_id'))
     # all_course = get_all_courses()
     return render(request, 'index.html', {'courses': courses})
 
@@ -107,6 +107,15 @@ def web_query_by_id(courses, request):
         except:
             return render(request, 'index.html')
         return courses
+
+def query_by_id2(course_id):
+    courses =  models.Course.objects.all()
+    if course_id:
+        try:
+            course = courses.filter(ID=course_id)
+        except:
+            return None
+        return course
 
 
 def web_query_by_teacher(courses, request):
