@@ -14,7 +14,7 @@ class Comment(models.Model):
     Course_ID = models.ForeignKey(Course, related_name='course', on_delete=models.CASCADE)  # 评论所属课程
     Comment_User_ID = models.ForeignKey(User, related_name='user1', on_delete=models.CASCADE)  # 评论者
     # To_User_ID = models.ForeignKey(User, related_name='user2', null=True, on_delete=models.CASCADE)  # 回复者
-    Comment_text = models.CharField(max_length=1024)
+    Comment_text = models.CharField(max_length=1024, null=False)
     Time = models.DateTimeField(null=False, default=now)
     To_Comment_ID = models.ForeignKey('self', related_name='to_comment', null=True, on_delete=models.CASCADE)  # 回复评论
 

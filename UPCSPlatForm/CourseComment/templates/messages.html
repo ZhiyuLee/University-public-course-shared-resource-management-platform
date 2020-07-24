@@ -22,8 +22,10 @@
 
 {% block content %}
 <div class="comments">
-    {% autopaginate messages 3 as thisPageMessages %}
+    <div class="title" style="text-align: center;"><h1>我的消息</h1></div>
+    {% autopaginate messages 2 as thisPageMessages %}
     {% for message in thisPageMessages %}
+
     <div class="comment-wrap">
         <div class="comment-block" style="word-wrap: break-word;word-break: break-all;overflow: hidden;">
             <h3>评论 <a id="course_name" onclick="gotoDetail({{ message.To_Comment_ID.Course_ID.ID }})" >

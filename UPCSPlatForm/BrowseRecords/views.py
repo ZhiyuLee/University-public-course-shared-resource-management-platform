@@ -148,10 +148,10 @@ def record(request):
     page = 1
     if request.method == 'GET' and request.GET.get('page') is not None:
         page = request.GET.get('page')
-        if my_records.count() % 10 == 0:
-            total_page = int(my_records.count() / 10)
+        if my_records.count() % 7 == 0:
+            total_page = int(my_records.count() / 7)
         else:
-            total_page = int(my_records.count() / 10)+1
+            total_page = int(my_records.count() / 7)+1
         if int(page) > total_page:
             page = total_page
             return redirect('/record/?page=' + str(page))

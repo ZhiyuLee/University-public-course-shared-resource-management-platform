@@ -22,7 +22,8 @@
 
 {% block content %}
 <div class="comments">
-    {% autopaginate my_comments 5 as thisPageComments %}
+<div class="title" style="text-align: center;"><h1>我的评价</h1></div>
+    {% autopaginate my_comments 4 as thisPageComments %}
     {% for comment in thisPageComments %}
     <div class="comment-wrap" style="word-wrap: break-word;word-break: break-all;overflow: hidden;">
         <div class="comment-block">
