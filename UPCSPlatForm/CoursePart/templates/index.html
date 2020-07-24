@@ -152,27 +152,27 @@
         <button type="submit" id="detail_btn" hidden></button>
     </form>
 
-    <table class="bordered">
+    <table class="bordered" >
         <thead>
             <tr>
-                <th>编号</th>
-                <th>课程名</th>
-                <th>课程类别</th>
-                <th>授课教师</th>
-                <th>授课学院</th>
-                <th>课程学分</th>
-                <th>收藏</th>
+                <th style="text-align: center">编号</th>
+                <th style="text-align: center">课程名</th>
+                <th style="text-align: center">课程类别</th>
+                <th style="text-align: center">授课教师</th>
+                <th style="text-align: center">授课学院</th>
+                <th style="text-align: center">课程学分</th>
+                <th style="text-align: center">收藏</th>
             </tr>
         </thead>
         {% autopaginate courses 10 as thisPageCourses %}
         {% for course in thisPageCourses %}
         <tr>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.ID }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.name }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.type }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.teacherName }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.college }}</td>
-            <td onclick="gotoDetail({{ course.ID }})">{{ course.credit }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.ID }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.name }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.type }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.teacherName }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.college }}</td>
+            <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.credit }}</td>
             <td>
                 {% if course in stars %}
                 <span style=" text-align:center;display:none" onclick="star({{ course.ID }})"id = "{{ course.ID }}star">
