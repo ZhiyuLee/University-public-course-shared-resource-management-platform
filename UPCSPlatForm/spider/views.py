@@ -67,6 +67,7 @@ def delete_space():
 
 #解析html_doc，获取需要的部分, 并存放进list
 def parser(CourseInfo):
+    delete_space()
     path = os.getcwd()
     #课程id 课程名	学分 教师名	职称 授课学院 领域 学年 学期 上课时间地点 备注
     CourseID = []
