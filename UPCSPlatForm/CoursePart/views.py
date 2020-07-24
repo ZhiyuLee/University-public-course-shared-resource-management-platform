@@ -169,6 +169,9 @@ def my_information(request):
     User = models.User.objects.get(UserID=request.session['user_id'])
     return render(request, "my_information.html", {"User": User})
 
+def about_us(request):
+    return render(request, "about_us.html")
+
 def editusername(request):
     from MySite import models
     if request.method == "POST":

@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load static %}
+{% load pagination_tags %}
+
+    {% block title %}关于我们{% endblock %}
+
+    {% block css %}
+    <link href="http://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+    {% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="header" id="head"  >
+        <div class="title" style="text-align: center;">
+            <h1>关于我们</h1>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
