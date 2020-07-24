@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 
 import os
 
+import configparser
+dir_now = os.path.dirname(os.path.dirname(os.path.abspath("settings.py")))
+conf = configparser.ConfigParser()
+conf.read(dir_now+'/config.ini')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -91,11 +96,11 @@ WSGI_APPLICATION = 'UPCSPlatForm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'mysite',
-        'USER': 'siteadmin',
-        'PASSWORD': '123456',
-        'HOST': 'localhost',
-        'PORT': '3306',
+        'NAME': conf.get('global', 'NAME'),  # 库名
+        'USER': conf.get('global', 'USER'),  # 用户名
+        'PASSWORD': conf.get('global', 'PASSWORD'),  # 密码
+        'HOST': conf.get('global', 'HOST'),  # 数据库主机ip
+        'PORT': conf.get('global', 'PORT'),  # 数据库端口号
     }
 }
 

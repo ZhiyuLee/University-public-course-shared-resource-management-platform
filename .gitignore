@@ -14,3 +14,9 @@ UPCSPlatForm/MySite/__pycache__/*
 UPCSPlatForm/MySite/migrations/__pycache__/*
 UPCSPlatForm/UPCSPlatForm/__pycache__/*
 UPCSPlatForm/spider/__pycache__/*
+
+
+#mysql配置文件
+UPCSPlatForm/UPCSPlatForm/config.ini
+#stmp服务配置文件
+UPCSPlatForm/MySite/config.ini
