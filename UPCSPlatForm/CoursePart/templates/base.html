@@ -13,6 +13,13 @@
         <script language="javascript" type="text/javascript">
             {% block js %}{% endblock %}
         </script>
+
+        {% if message %}
+        <script type="text/javascript">
+            alert('{{ message }}')
+        </script>
+        {% endif %}
+
     </head>
 
     <body>

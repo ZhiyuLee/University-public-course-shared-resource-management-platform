@@ -33,6 +33,12 @@ def makeComment(request):
         return render(request, 'detail.html', {"course": thisPageCourse,
                                                'commentForm': newCommentForm,
                                                'comments': comments})
+    newCommentForm = forms.CommentForm()
+    comments = query_by_Course(thisPageCourse)
+    return render(request, 'detail.html', {"course": thisPageCourse,
+                                           'commentForm': newCommentForm,
+                                           'comments': comments,
+                                           'message': '评论不得为空'})
 
 
 def replyComment(request):
@@ -57,6 +63,12 @@ def replyComment(request):
         return render(request, 'detail.html', {"course": thisPageCourse,
                                                'commentForm': newCommentForm,
                                                'comments': comments})
+    newCommentForm = forms.CommentForm()
+    comments = query_by_Course(thisPageCourse)
+    return render(request, 'detail.html', {"course": thisPageCourse,
+                                           'commentForm': newCommentForm,
+                                           'comments': comments,
+                                           'message': '回复不得为空'})
 
 
 def detail(request):
