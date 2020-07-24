@@ -3,8 +3,7 @@
 # description:历史记录相关操作
 
 
-from sqlite3.dbapi2 import Time
-from urllib import request
+# from sqlite3.dbapi2 import Time
 
 from django import forms
 from django.shortcuts import render, redirect
@@ -45,7 +44,7 @@ from MySite import views as MS_views
 #             Course_ID = str(infos.id)
 #         response.set_cookie('Course_ID', Course_ID)
 #         return response
-
+"""
 def record(request):
     global thisPageRecord
     if request.method == "GET" and \
@@ -93,16 +92,13 @@ def createRecord(request):
         return render(request, 'detail.html', {"record": thisPageRecord,
                                                'recordForm': newRecordForm,
                                                'records': records})
+"""
 
 
 def add_record(user_id, course_id):
-    # user_id = request.session.get('user_id')
-    # course_id = request.session.get('course_id')
     newRecord = models.BrowseRecords()
-    # newRecord.Record_ID = record
     newRecord.Course_ID = CP_views.query_by_id2(course_id)
     newRecord.User_ID = MS_views.query_by_id(user_id)
-    # newRecord.Time = browse_time
     newRecord.save()
 
 
@@ -110,9 +106,11 @@ def delete_all_records():
     return BrowseRecords.objects.all().delete()
 
 
+"""
 def sort_by_time(record):
     records = models.BrowseRecords.objects.filter(Record_ID=record)
     return records.order_by("-Time")
+"""
 
 
 def get_all_records():
@@ -122,13 +120,39 @@ def get_all_records():
 def query_by_id(records, record_id):
     if record_id:
         try:
-            record = records.filter(ID=record_id)
+            Record = records.filter(RecordID=record_id)
         except:
             return None
-        return record
+        return Record.first()
 
 
 def delete_by_id(record_id):
     all_records = get_all_records()
-    record = query_by_id(all_records, record_id)
-    models.Course.delete(record)
+    Record = query_by_id(all_records, record_id)
+    models.Course.delete(Record)
+
+
+def query_by_user(user):
+    return get_all_records().filter(User_ID=user).order_by("-Time")
+
+
+def record(request):
+    if request.method == 'POST':
+        record_id = request.POST.get("delete_id")
+        page_num = request.POST.get("page")
+        delete_by_id(record_id)
+        return redirect('/record/?page='+page_num)
+    user_id = request.session.get("user_id")
+    user = MS_views.query_by_id(user_id)
+    my_records = query_by_user(user)
+    page = 1
+    if request.method == 'GET' and request.GET.get('page') is not None:
+        page = request.GET.get('page')
+        if my_records.count() % 10 == 0:
+            total_page = int(my_records.count() / 10)
+        else:
+            total_page = int(my_records.count() / 10)+1
+        if int(page) > total_page:
+            page = total_page
+            return redirect('/record/?page=' + str(page))
+    return render(request, "BrowseRecords.html", {"records": my_records, "this_page": page})

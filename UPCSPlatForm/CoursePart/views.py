@@ -13,7 +13,6 @@ from MySite import forms
 import hashlib
 
 
-
 def index(request):
     # tests.testCoursePart.test_add_course(self=None)
     courses = get_all_courses()

@@ -1,10 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>浏览记录</title>
-</head>
-<body>
+{% extends "base.html" %}
+{% load static %}
+{% load pagination_tags %}
 
-</body>
-</html>
+{% block title %}{{course.name}}历史浏览{% endblock %}
+
+{% block css %}
+<link href="{% static 'css/history.css' %}" rel="stylesheet"/>
+<link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
+{% endblock %}
+
+{% block js %}
+
+    function gotoDetail(id) {
+        let detail = document.getElementById("detail_id");
+        detail.value = id;
+        let detail_btn = document.getElementById("detail_btn");
+        detail_btn.click();
+    }
+
+    function deleteRecord(id, page_num) {
+        let recordToDelete = document.getElementById("delete_id");
+        recordToDelete.value = id;
+        let this_page_num = document.getElementById("page");
+        this_page_num.value = page_num;
+        let delete_btn = document.getElementById("delete_btn");
+        delete_btn.click();
+        return false;
+    }
+
+{% endblock %}
+
+{% block content %}
+    <center>
+        <div id="container">
+            <div id="tasks">
+                <div id="notification"><h1>历史浏览</h1></div>
+
+                <ul id="tasksList">
+                    {% autopaginate records 10 as thisPageRecords %}
+                    {% for record in thisPageRecords %}
+                    <li style="float: left; width: 440px">
+                        <div style="float: left; font-size: 14px">
+                             浏览
+                            <a id="course_name"  onclick="gotoDetail({{ record.Course_ID.ID }})">
+                            {{ record.Course_ID.name }}</a>
+                        </div>
+                        <div style="float: right; font-size: 14px">
+                            {{ record.Time }}
+                        </div>
+                        <br><br>
+                    </li>
+                    <li style="width: 50px; float: right; background-color: #d43f3a"
+                        onclick="deleteRecord({{ record.RecordID }}, {{ this_page }})">
+                        <div style="font-size: 19px">🗑</div>
+                    </li>
+                    {% endfor %}
+                </ul>
+
+            </div>
+        {% paginate %}
+        <br>
+        </div>
+
+    <form action="/detail/" method="get">
+        <input type="text" id="detail_id" name="detail_id" hidden>
+        <button type="submit" id="detail_btn" hidden></button>
+    </form>
+
+    <form action="/record/" method="post" hidden>
+        {% csrf_token %}
+        <input type="text" id="delete_id" name="delete_id">
+        <input type="text" id="page" name="page">
+        <button type="submit" id="delete_btn"></button>
+    </form>
+
+    <iframe id="iframe_id" name="iframe_id" style="display:none;"></iframe>
+
+    </center>
+{% endblock %}
