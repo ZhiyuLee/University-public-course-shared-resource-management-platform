@@ -96,11 +96,11 @@ WSGI_APPLICATION = 'UPCSPlatForm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': conf.get('global', 'NAME'),  # 库名
-        'USER': conf.get('global', 'USER'),  # 用户名
-        'PASSWORD': conf.get('global', 'PASSWORD'),  # 密码
-        'HOST': conf.get('global', 'HOST'),  # 数据库主机ip
-        'PORT': conf.get('global', 'PORT'),  # 数据库端口号
+        'NAME': conf.get('global', 'table'),#库名
+        'USER': conf.get('global', 'uname'),#用户名
+        'PASSWORD': conf.get('global', 'passwd'),#密码
+        'HOST': conf.get('global', 'ip'),#数据库主机ip
+        'PORT': conf.get('global', 'port'),#数据库端口号
     }
 }
 
