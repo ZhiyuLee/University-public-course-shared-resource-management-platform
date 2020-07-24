@@ -130,7 +130,7 @@
             background-color: #FFFFBB;
             font-size: 15px;
         }
-        #captcha-img2{
+        #captcha-img1{
             text-align: center;
             display: none;
             height: 55px;
@@ -139,7 +139,7 @@
             background-color: #FFFFBB;
             font-size: 15px;
         }
-        #captcha-img3{
+        #captcha-img2{
             text-align: center;
             display: none;
             height: 55px;
@@ -289,7 +289,7 @@
         </div>
 
         <div id="loginBox">
-            <form action="/servlet/_34388039353c52" method="post" name="form1" onsubmit="return verification();">
+            <form action="/servlet/_6daf195df2a" method="post" name="form1" onsubmit="return verification();">
                 <input type="text" name="timestamp" hidden>
                 <input type="text" name="jwb" hidden value = "教务"/>
                 <table id="loginInputBox">
@@ -316,9 +316,9 @@
                         <td style="text-align: left;" colspan="3">
                             <div class="inputWraper" style="width:90px;float:left"><input name="xdvfb" tabindex="3"/></div>
                             <div style="height:34px;margin:5px 5px 5px 5px;float:left;">
-                                <img id="captcha-img2" class="show" name="eat" alt="验证码" src="/servlet/GenImg?v=1"/>
-                                <img id="captcha-img1" class="hide" name="sleep" alt="验证码" src="/servlet/_51d5096830?v=2"/>
-                                <img id="captcha-img3" class="hide" name="run" alt="验证码" src="/servlet/_4F6T314?v=3"/>
+                                <img id="captcha-img1" class="show" name="eat" alt="验证码" src="/servlet/GenImg?v=1"/>
+                                <img id="captcha-img2" class="hide" name="run" alt="验证码" src="/servlet/_4F6T314?v=3"/>
+                                <img id="captcha-img3" class="hide" name="sleep" alt="验证码" src="/servlet/_53a3839a0ffa22e?v=2"/>
                                 <img id="captcha-img4" class="show" name="fly" alt="验证码" src="/servlet/_sdf234s23f32f?v=4"/>
                             </div>
                             <div style="float:left;font-size:10px;margin-left:5px ; margin-top:15px;">

@@ -21,22 +21,6 @@ class User(models.Model):
         verbose_name = "用户"
         verbose_name_plural = "用户"
 
-
-class Evaluation(models.Model):
-    EvaluationID = models.CharField(max_length=128, unique=True)
-    UserID = models.CharField(max_length=128)
-    Description = models.CharField(max_length=256)
-    Date = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return self.EvaluationID
-
-    class Meta:
-        ordering = ["EvaluationID", "Date"]
-        verbose_name = "用户评价"
-        verbose_name_plural = "用户评价"
-
-
 class ConfirmString(models.Model):
     code = models.CharField(max_length=256)
     user = models.OneToOneField('User', on_delete=models.CASCADE)
