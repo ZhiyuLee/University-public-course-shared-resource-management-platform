@@ -169,6 +169,11 @@ def my_information(request):
     User = models.User.objects.get(UserID=request.session['user_id'])
     return render(request, "my_information.html", {"User": User})
 
+<<<<<<< HEAD
+def about_us(request):
+    return render(request, "about_us.html")
+=======
+>>>>>>> 7b659d7370c5c0cb4a05406521797f6d19d49046
 
 def editusername(request):
     from MySite import models

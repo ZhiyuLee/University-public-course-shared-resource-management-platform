@@ -34,6 +34,7 @@ urlpatterns = [
     path('editusername/', course_views.editusername, name='editusername'),
     path('editpassword/', course_views.editpassword, name='editpassword'),
     path('record/', BR_views.record, name='record'),
+    path('about_us/', course_views.about_us, name="about_us"),
 
 
 ]
