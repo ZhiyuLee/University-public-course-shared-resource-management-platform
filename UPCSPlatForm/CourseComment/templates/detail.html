@@ -74,31 +74,31 @@
 						<div class="post_info">
                         
                             <div class="post_date">
-                                课程号:{{course.ID }}
+                                课程编号:<br>{{course.ID }}
 							</div>
                             
                             <div class="post_author">
-                                课程类别:{{course.type}}
+                                课程类别:<br>{{course.type}}
                             </div>
                             
                             <div class="post_comment">
-                                授课教师:{{course.teacherName}}
+                                授课教师:<br>{{course.teacherName}}
                             </div>
 							
 							<div class="post_comment">
-                                授课学院:{{course.college}}
+                                授课学院:<br>{{course.college}}
                             </div>
                             
 							<div class="post_date">
-                                课程学分:{{course.credit}}
+                                课程学分:<br>{{course.credit}}
 							</div>
 							
 							<div class="post_author">
-                                学时安排:{{course.time}}
+                                学时安排:<br>暂无记录
                             </div>
                                                         
                         </div>
-
+                        <br>
                         <form action="/detail/" method="post">
                             {% csrf_token %}
 						    <div class="group">

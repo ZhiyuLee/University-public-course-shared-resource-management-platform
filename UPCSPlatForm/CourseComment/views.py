@@ -13,8 +13,6 @@ import CoursePart.views as course_view
 from CoursePart.models import Course
 import MySite.views as user_views
 
-
-
 thisPageCourse: Course = None
 
 
@@ -96,6 +94,7 @@ def detail(request):
                                                'comments': comments})
     return redirect('/index/')
 
+
 # def index(request):
 #     return render(request, comment.html)
 #
@@ -144,7 +143,7 @@ def query_by_user(user):
 
 def get_user_messages(user):
     messages = models.Comment.objects.filter(To_Comment_ID__Comment_User_ID=user)
-    return  messages.order_by("-Time")
+    return messages.order_by("-Time")
 
 
 def my_comments(request):
