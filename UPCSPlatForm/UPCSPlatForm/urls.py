@@ -24,11 +24,14 @@ urlpatterns = [
     path('detail/', comment_views.detail, name='detail'),
     path('spider/', spider_views.index, name='spider'),
     path('my_comments/', comment_views.my_comments, name='my_comment'),
+    path('my_information/', course_views.my_information, name='my_information'),
     path('messages/', comment_views.messages, name='messages'),
     path('star/', favor_views.star, name='messages'),
     path('forget/', ForgetPwdView.as_view(), name='forget'),
     path('reset/', views.reset, name='reset'),
     path('modify/', ModifyView.as_view(), name='modify'),
+    path('editusername/', course_views.editusername, name='editusername'),
+    path('editpassword/', course_views.editpassword, name='editpassword'),
 
 ]
 

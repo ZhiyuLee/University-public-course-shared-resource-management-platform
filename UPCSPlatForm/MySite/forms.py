@@ -32,3 +32,9 @@ class ForgetForm(forms.Form):
 class ResetForm(forms.Form):
     newpwd1 = forms.CharField(required=True,max_length=256,error_messages={'required': '密码不能为空.', 'max_length': "至多6位"})
     newpwd2 = forms.CharField(required=True, max_length=256, error_messages={'required': '密码不能为空.', 'max_length': "至多6位"})
+
+class EditUserNameForm(forms.Form):
+    UserName = forms.CharField(label="用户昵称",max_length=128, widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+class EditPasswordForm(forms.Form):
+    Password = forms.CharField(label="密码", required=True,max_length=256, widget=forms.PasswordInput(attrs={'class': 'form-control'}))

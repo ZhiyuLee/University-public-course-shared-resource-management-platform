@@ -9,6 +9,8 @@ import decimal
 from django.shortcuts import render, redirect
 from Favorites.views import delete_favor,add_favor,get_favorite_list
 import MySite.views as user_view
+from MySite import forms
+import hashlib
 
 
 
@@ -161,5 +163,50 @@ def web_query_by_college(courses, request):
         except:
             return render(request, 'index.html')
         return courses
+
+def my_information(request):
+    from MySite import models
+    User = models.User.objects.get(UserID=request.session['user_id'])
+    return render(request, "my_information.html", {"User": User})
+
+def editusername(request):
+    from MySite import models
+    if request.method == "POST":
+        user_editform = forms.EditUserNameForm(request.POST)
+        if user_editform.is_valid():
+            UserName = user_editform.cleaned_data.get('UserName')
+
+            User = models.User.objects.get(UserID=request.session['user_id'])
+            User.UserName = UserName
+            User.save()
+
+            return render(request, 'my_information.html', locals())
+        else:
+            return render(request, 'editusername.html', locals())
+    user_editform = forms.EditUserNameForm()
+    return render(request, 'editusername.html', locals())
+
+def editpassword(request):
+    from MySite import models
+    if request.method == "POST":
+        user_editform = forms.EditPasswordForm(request.POST)
+        if user_editform.is_valid():
+            Password = user_editform.cleaned_data.get('Password')
+
+            User = models.User.objects.get(UserID=request.session['user_id'])
+            User.Password = hash_code(Password)
+            User.save()
+
+            return render(request, 'my_information.html', locals())
+        else:
+            return render(request, 'editpassword.html', locals())
+    user_editform = forms.EditPasswordForm()
+    return render(request, 'editpassword.html', locals())
+
+def hash_code(s, salt='mysite'):  # 加点盐
+    h = hashlib.sha256()
+    s += salt
+    h.update(s.encode())  # update方法只接收bytes类型
+    return h.hexdigest()
 
 # End
