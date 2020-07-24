@@ -81,7 +81,7 @@ def delete_by_id(course_id):
     models.Course.delete(course)
 
 
-# 课程名, 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
+# 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
 def add_course(course_name,
                course_type, course_teacher,
                course_collage, course_credit,
@@ -164,10 +164,12 @@ def web_query_by_college(courses, request):
             return render(request, 'index.html')
         return courses
 
+
 def my_information(request):
     from MySite import models
     User = models.User.objects.get(UserID=request.session['user_id'])
     return render(request, "my_information.html", {"User": User})
+
 
 def editusername(request):
     from MySite import models
@@ -186,6 +188,7 @@ def editusername(request):
     user_editform = forms.EditUserNameForm()
     return render(request, 'editusername.html', locals())
 
+
 def editpassword(request):
     from MySite import models
     if request.method == "POST":
@@ -202,6 +205,7 @@ def editpassword(request):
             return render(request, 'editpassword.html', locals())
     user_editform = forms.EditPasswordForm()
     return render(request, 'editpassword.html', locals())
+
 
 def hash_code(s, salt='mysite'):  # 加点盐
     h = hashlib.sha256()

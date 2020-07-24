@@ -100,7 +100,7 @@ def add_record(user_id, course_id):
     # course_id = request.session.get('course_id')
     newRecord = models.BrowseRecords()
     # newRecord.Record_ID = record
-    newRecord.CourseID = CP_views.query_by_id2(course_id)
+    newRecord.Course_ID = CP_views.query_by_id2(course_id)
     newRecord.User_ID = MS_views.query_by_id(user_id)
     # newRecord.Time = browse_time
     newRecord.save()

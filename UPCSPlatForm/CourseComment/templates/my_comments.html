@@ -9,12 +9,25 @@
 <link href="{% static 'css/pagination.css' %}" rel="stylesheet"/>
 {% endblock %}
 
+{% block js %}
+
+    function gotoDetail(id) {
+        let detail = document.getElementById("detail_id");
+        detail.value = id;
+        let detail_btn = document.getElementById("detail_btn");
+        detail_btn.click();
+    }
+
+{% endblock %}
+
 {% block content %}
 <div class="comments">
     {% autopaginate my_comments 5 as thisPageComments %}
     {% for comment in thisPageComments %}
     <div class="comment-wrap" style="word-wrap: break-word;word-break: break-all;overflow: hidden;">
         <div class="comment-block">
+        <h3>评论 <a id="course_name" onclick="gotoDetail({{ comment.Course_ID.ID }})" >
+            {{ comment.Course_ID.name }}</a></h3>
             <h4><a id="user_name">{{ comment.Comment_User_ID.UserName }}:</a></h4>
             {% if comment.To_Comment_ID == null %}
                 <p class="comment-text">{{ comment.Comment_text }}</p>
@@ -28,7 +41,14 @@
         </div>
     </div>
     {% endfor %}
+
     {% paginate %}
+
+    <form action="/detail/" method="get">
+        <input type="text" id="detail_id" name="detail_id" hidden>
+        <button type="submit" id="detail_btn" hidden></button>
+    </form>
+
 </div>
 
 {% endblock %}
