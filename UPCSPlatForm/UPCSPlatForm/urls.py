@@ -10,6 +10,7 @@ from CoursePart import views as course_views
 from CourseComment import views as comment_views
 from spider import views as spider_views
 from Favorites import views as favor_views
+from MySite.views import ForgetPwdView,ModifyView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,6 +26,9 @@ urlpatterns = [
     path('my_comments/', comment_views.my_comments, name='my_comment'),
     path('messages/', comment_views.messages, name='messages'),
     path('star/', favor_views.star, name='messages'),
+    path('forget/', ForgetPwdView.as_view(), name='forget'),
+    path('reset/', views.reset, name='reset'),
+    path('modify/', ModifyView.as_view(), name='modify'),
 
 ]
 

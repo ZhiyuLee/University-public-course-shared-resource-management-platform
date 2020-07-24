@@ -22,3 +22,13 @@ class RegisterForm(forms.Form):
 
 class EvaluationForm(forms.Form):
     pass
+
+#forget.html中，用于验证邮箱格式和验证码
+class ForgetForm(forms.Form):
+    email=forms.EmailField(required=True)
+    captcha=CaptchaField(label='验证码',error_messages={'invalid':'验证码错误'})
+
+#reset.html中，用于验证新设的密码
+class ResetForm(forms.Form):
+    newpwd1 = forms.CharField(required=True,max_length=256,error_messages={'required': '密码不能为空.', 'max_length': "至多6位"})
+    newpwd2 = forms.CharField(required=True, max_length=256, error_messages={'required': '密码不能为空.', 'max_length': "至多6位"})

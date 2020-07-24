@@ -142,6 +142,7 @@ EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
 EMAIL_HOST_USER = '574730362@qq.com'
 EMAIL_HOST_PASSWORD = 'qvqgffdtpiprbbcg'
+EMAIL_FROM='574730362@qq.com' #同样是你的邮箱，跟上面都是发信者邮箱
 
 # 注册有效期天数
 CONFIRM_DAYS = 7

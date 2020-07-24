@@ -6,6 +6,11 @@ import datetime
 from django.conf import settings
 import CoursePart.views as course_views
 from django.utils import timezone
+from random import Random
+from django.core.mail import send_mail
+from UPCSPlatForm.settings import EMAIL_FROM
+from MySite.forms import ForgetForm,ResetForm
+from django.views.generic import View
 
 
 # Create your views here.
@@ -173,5 +178,65 @@ def query_by_id(user_id):
         except:
             return None
         return user
+def random_str(randomlength=8):
+    str=''
+    chars='AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz0123456789'
+    length=len(chars)-1
+    random=Random()
+    for i in range(randomlength):
+        str+=chars[random.randint(0,length)]
+    return str
+
+def send_findpassword_email(email):
+
+    code = random_str(16)
+    email_title = '密码重置链接'
+    email_body = '请点击下面的链接重置你的密码：http://127.0.0.1:8000/reset'.format(code)
+
+    send_status = send_mail(email_title, email_body, EMAIL_FROM, [email])
+    if send_status:
+        pass
+class ForgetPwdView(View):
+    '''忘记密码'''
+    message = ''
+    def get(self,request):
+        forget_form=forms.ForgetForm()
+        return render(request,'login/forget.html',{'forget_form':forget_form})
+    def post(self,request):
+        forget_form = forms.ForgetForm(request.POST)
+        if forget_form.is_valid():
+            email=request.POST.get('email','')
+            same_email_user = models.User.objects.filter(Email=email)
+            if same_email_user:
+                send_findpassword_email(email)
+                return render(request, 'login/success_send.html',locals())
+            else:
+                message = '邮箱不存在'
+                return render(request, 'login/forget.html',locals())
+        else:
+            return render(request,'login/forget.html',{'forget_form':forget_form})
+
+def reset(request):
+    return render(request,'login/reset.html',locals())
+
+#因为<form>表单中的路径要是确定的，所以post函数另外定义一个类来完成
+class ModifyView(View):
+    """重置密码post部分"""
+    def post(self,request):
+        reset_form=ResetForm(request.POST)
+        if reset_form.is_valid():
+            email=request.POST.get('email','')
+            pwd1=request.POST.get('newpwd1','')
+            pwd2=request.POST.get('newpwd2','')
+            if pwd1!=pwd2:
+                return render(request,'login/reset.html',{'msg':'密码不一致！'})
+            else:
+                this_user = models.User.objects.filter(Email=email).first()
+                this_user.Password=hash_code(pwd1)
+                this_user.save()
+                return redirect('login')
+        else:
+            email=request.POST.get('email','')
+            return render(request,'login/reset.html',{'msg':reset_form.errors})
 
 # End

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>忘记密码</title>
+
+<style>
+.out{
+    width: 500px;
+    height: 900px;
+    margin: 0 auto;
+    margin-top: 100px;
+}
+</style>
+</head>
+<body>
+
+
+    <div class="out">
+        <h1>快通过邮箱找回密码吧！</h1>
+        <form method="post" action="/forget/">
+            <P><span>邮箱：</span><input type="text" name="email"></P>
+            <P><span>验证码：</span>{{ forget_form.captcha }}</P>
+            {% csrf_token %}
+            <h1 style="margin-left: 100px;">{{ message }}</h1>
+            <p><input type="submit" value="确认发送验证邮件"></p>
+        </form>
+        <h3>{{ forget_form.errors }}</h3>
+    </div>
+
+
+</body>
+</html>
