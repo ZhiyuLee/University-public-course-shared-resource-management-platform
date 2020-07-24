@@ -11,6 +11,7 @@ from CourseComment import views as comment_views
 from spider import views as spider_views
 from Favorites import views as favor_views
 from MySite.views import ForgetPwdView,ModifyView
+from BrowseRecords import views as BR_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,6 +33,8 @@ urlpatterns = [
     path('modify/', ModifyView.as_view(), name='modify'),
     path('editusername/', course_views.editusername, name='editusername'),
     path('editpassword/', course_views.editpassword, name='editpassword'),
+    path('record/', BR_views.record, name='record'),
+
 
 ]
 

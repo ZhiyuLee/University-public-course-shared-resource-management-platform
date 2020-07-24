@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'CourseComment',
     'spider',
     'Favorites',
+    'BrowseRecords',
 ]
 
 MIDDLEWARE = [

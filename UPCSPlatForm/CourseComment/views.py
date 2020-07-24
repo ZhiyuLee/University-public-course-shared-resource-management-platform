@@ -6,11 +6,13 @@ from django.http import JsonResponse
 from django.shortcuts import render, redirect
 
 # Create your views here.
+from BrowseRecords.views import add_record
 from CourseComment import models, forms
 from CourseComment.models import Comment
 import CoursePart.views as course_view
 from CoursePart.models import Course
 import MySite.views as user_views
+
 
 
 thisPageCourse: Course = None
@@ -68,6 +70,8 @@ def detail(request):
         allCourses = course_view.get_all_courses()
         thisPageCourse = course_view.query_by_id(allCourses, courseID).first()
         comments = query_by_Course(thisPageCourse)
+        user_id = request.session.get('user_id')
+        add_record(user_id, thisPageCourse.ID)
         return render(request, 'detail.html', {'course': thisPageCourse,
                                                'commentForm': commentForm,
                                                'comments': comments})
