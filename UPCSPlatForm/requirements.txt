@@ -7,3 +7,4 @@ openpyxl==3.0.3
 beautifulsoup4==4.9.1
 PyMySQL==0.9.3
 pywin32
+cryptography
