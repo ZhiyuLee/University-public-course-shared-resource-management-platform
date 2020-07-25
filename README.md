@@ -1,10 +1,20 @@
 # University-public-course-shared-resource-management-platform
-中级项目实践小组项目
+#### 中级项目实践小组项目
 
 大学公共课程资源共享平台-面向武大
 
-在项目文件目录下使用命令python manage.py runserver启动
+#### 环境配置
 
-在本地127.0.0.1:8000可以进行页面测试
+python == 3.7.0
 
-127.0.0.1:8000/admin页面可以登陆管理，需要运行python manage.py createsuperuser命令提前添加超级管理员
+django == 2.1.2
+
+django-simple-captcha == 0.5.12
+
+dj-pagination == 2.5.0
+
+pywin32
+
+#### 运行项目
+
+需要在根目录下添加配置文件config.ini
