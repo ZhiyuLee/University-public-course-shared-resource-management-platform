@@ -11,11 +11,15 @@ https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 
 import os
-
 import configparser
+
+#配置文件
 dir_now = os.path.dirname(os.path.dirname(os.path.abspath("settings.py")))
+conf_path = dir_now+"\\config.ini"
 conf = configparser.ConfigParser()
-conf.read(dir_now+'/config.ini')
+conf.read(conf_path)
+print(conf_path)
+
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -26,7 +30,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '^#g3v-9#_(6_(&cnbj_(u9st(zdt*ue@y0vmv=l$m2k4-l&20k'
+SECRET_KEY = conf.get("SECRET_KEY", "SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -93,14 +97,15 @@ WSGI_APPLICATION = 'UPCSPlatForm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': conf.get('global', 'table'),#库名
-        'USER': conf.get('global', 'uname'),#用户名
-        'PASSWORD': conf.get('global', 'passwd'),#密码
-        'HOST': conf.get('global', 'ip'),#数据库主机ip
-        'PORT': conf.get('global', 'port'),#数据库端口号
+        'NAME': conf.get("GLOBAL", "NAME"),#库名
+        'USER': conf.get("GLOBAL", "USER"),#用户名
+        'PASSWORD': conf.get("GLOBAL", "PASSWORD"),#密码
+        'HOST': conf.get("GLOBAL", "HOST"),#数据库主机ip
+        'PORT': conf.get("GLOBAL", "PORT"),#数据库端口号
     }
 }
 
@@ -151,9 +156,9 @@ STATICFILES_DIRS = (
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.qq.com'
 EMAIL_PORT = 25
-EMAIL_HOST_USER = '574730362@qq.com'
-EMAIL_HOST_PASSWORD = 'qvqgffdtpiprbbcg'
-EMAIL_FROM='574730362@qq.com' #同样是你的邮箱，跟上面都是发信者邮箱
+EMAIL_HOST_USER = conf.get("EMAIL", "EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = conf.get("EMAIL", "EMAIL_HOST_PASSWORD")
+EMAIL_FROM=conf.get("EMAIL", "EMAIL_FROM") #同样是你的邮箱，跟上面都是发信者邮箱
 
 # 注册有效期天数
 CONFIRM_DAYS = 7
