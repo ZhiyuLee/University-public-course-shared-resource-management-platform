@@ -2,6 +2,7 @@
 
 #课程文件
 *.xlsx
+UPCSPlatForm/spider/txt/*.txt
 
 
 #缓冲文件
@@ -20,3 +21,7 @@ UPCSPlatForm/BrowseRecords/__pycache__/*.pyc
 UPCSPlatForm/UPCSPlatForm/config.ini
 #stmp服务配置文件
 UPCSPlatForm/MySite/config.ini
+
+# ignore all except .gitignore file
+*
+!.gitignore
