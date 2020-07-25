@@ -1,19 +1,20 @@
 #mysql config
 
 #课程文件
-UPCSPlatForm/spider/txt/*
+UPCSPlatForm/spider/txt/*.txt
 *.xlsx
 
 
 #缓冲文件
 *.pyc
-UPCSPlatForm/CoursePart/__pycache__/*
-UPCSPlatForm/CourseComment/__pycache__/*
-UPCSPlatForm/Favorites/__pycache__/*
-UPCSPlatForm/MySite/__pycache__/*
-UPCSPlatForm/MySite/migrations/__pycache__/*
-UPCSPlatForm/UPCSPlatForm/__pycache__/*
-UPCSPlatForm/spider/__pycache__/*
+UPCSPlatForm/CoursePart/__pycache__/*.pyc
+UPCSPlatForm/CourseComment/__pycache__/*.pyc
+UPCSPlatForm/Favorites/__pycache__/*.pyc
+UPCSPlatForm/MySite/__pycache__/*.pyc
+UPCSPlatForm/MySite/migrations/__pycache__/*.pyc
+UPCSPlatForm/UPCSPlatForm/__pycache__/*.pyc
+UPCSPlatForm/spider/__pycache__/*.pyc
+UPCSPlatForm/BrowseRecords/__pycache__/*.pyc
 
 
 #mysql配置文件
