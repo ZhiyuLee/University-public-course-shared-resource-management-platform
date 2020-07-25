@@ -17,7 +17,5 @@ UPCSPlatForm/spider/__pycache__/*.pyc
 UPCSPlatForm/BrowseRecords/__pycache__/*.pyc
 
 
-#mysql配置文件
-UPCSPlatForm/UPCSPlatForm/config.ini
-#stmp服务配置文件
-UPCSPlatForm/MySite/config.ini
+#配置文件
+*.ini
