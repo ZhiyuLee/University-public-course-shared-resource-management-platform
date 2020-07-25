@@ -1,0 +1,9 @@
+Django==3.0.3
+Favorites==0.3.2
+django_recaptcha==2.0.6
+requests==2.22.0
+xlrd==1.2.0
+openpyxl==3.0.3
+beautifulsoup4==4.9.1
+PyMySQL==0.9.3
+pywin32
