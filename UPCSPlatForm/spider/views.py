@@ -162,4 +162,4 @@ def import_courses():
     for i in range(1,nrows - 1):
         if table.row_values(i):
             # 课程名, 课程类别, 授课教师, 授课学院, 课程学分, 学时安排
-            CP_views.add_course(table.row_values(i)[1],table.row_values(i)[6],table.row_values(i)[3],table.row_values(i)[4],table.row_values(i)[2],table.row_values(i)[9])
+            CP_views.add_course(table.row_values(i)[1],table.row_values(i)[6],table.row_values(i)[3],table.row_values(i)[5],table.row_values(i)[2],table.row_values(i)[9])
