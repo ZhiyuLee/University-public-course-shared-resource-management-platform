@@ -10,7 +10,7 @@
 <body>
     <div class="container" style="width: 500px;height: 300px; border-radius: 15px">
     <div class="form form--login" style="width:500px">
-        <div class="form--heading">请输入昵称</div>
+        <div class="form--heading">请输入新昵称</div>
             <form class="form-edit" action="/editusername/" method="post" autocomplete="off">
                 {% csrf_token %}
                 {{ user_editform.UserName}}

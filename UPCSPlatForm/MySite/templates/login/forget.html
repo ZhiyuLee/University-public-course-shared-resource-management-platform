@@ -1,34 +1,39 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>忘记密码</title>
-
-<style>
-.out{
-    width: 500px;
-    height: 900px;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-</style>
+    <link href="{% static 'css/form.css' %}" rel="stylesheet"/>
 </head>
+
 <body>
 
+    <div class="container" style="width: 500px;height: 400px; border-radius: 15px">
+    <div class="form form--login" style="width:500px">
+        <div class="form--heading">快通过邮箱找回密码吧</div>
+            <form class="form-edit" method="post" action="/forget/">
+                {% csrf_token %}
+                <P>
+                    <span>邮箱：</span>
+                    <div style="width: 200px; text-align: center;height: auto">
+                        <input type="text" name="email">
+                    </div>
 
-    <div class="out">
-        <h1>快通过邮箱找回密码吧！</h1>
-        <form method="post" action="/forget/">
-            <P><span>邮箱：</span><input type="text" name="email"></P>
-            <P><span>验证码：</span>{{ forget_form.captcha }}</P>
-            {% csrf_token %}
-            <h1 style="margin-left: 100px;">{{ message }}</h1>
-            <p><input type="submit" value="确认发送验证邮件"></p>
-        </form>
-        <h3>{{ forget_form.errors }}</h3>
+                </P>
+
+                <P><span>验证码：</span>
+                    <div style="width: 200px; text-align: center;height: auto">
+                        {{ forget_form.captcha }}
+                    </div>
+                </P>
+                {% csrf_token %}
+                <p><input type="submit" class="button" value="确认发送验证邮件"></p>
+            </form>
     </div>
+    </div>
+    <h4 style="margin-top: 0px;">{{ message }}</h4>
+    <h4>{{ forget_form.errors }}</h4>
 
 
 </body>
