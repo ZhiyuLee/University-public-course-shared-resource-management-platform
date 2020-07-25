@@ -1,35 +1,38 @@
-<!DOCTYPE html>
 {% load static %}
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>重置密码</title>
-
-<style>
-.out{
-    width: 500px;
-    height: 900px;
-    margin: 0 auto;
-    margin-top: 100px;
-}
-</style>
+    <link href="{% static 'css/form.css' %}" rel="stylesheet"/>
 </head>
+
 <body>
+    <div class="container" style="width: 500px;height: 300px; border-radius: 15px">
+    <div class="form form--login" style="width:500px">
+        <div class="form--heading">请重新设置一个新密码</div>
+            <form method="post" action="{% url 'modify' %}" class="form-edit">
+                <P>
+                    <span>请再确认邮箱：</span>
+                    <input type="email" name="email" placeholder="" style="width: 200px; text-align: center;height: auto">
+                </P>
+                <P align="left">
+                    <span>新密码：
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <input type="password" name="newpwd1" placeholder="" style="width: 200px; text-align: center;height: auto">
+                </P>
+                <P>
+                    <span>确认新密码：&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</span>
+                    <input type="password" name="newpwd2" placeholder="" style="width: 200px; text-align: center;height: auto">
+                </P>
+                {% csrf_token %}
+                <p><input type="submit" class="button" value="确认"></p>
+                <h4>{{ msg }}</h4>
+            </form>
+        </div>
 
-
-    <div class="out">
-        <h1>请重新设置一个新密码！</h1>
-        <form method="post" action="{% url 'modify' %}">
-            <P><span>请再确认邮箱：</span><input type="email" name="email" placeholder=""></P>
-            <P><span>新密码：</span><input type="password" name="newpwd1" placeholder=""></P>
-            <P><span>确认新密码：</span><input type="password" name="newpwd2" placeholder=""></P>
-            {% csrf_token %}
-            <p><input type="submit" value="确认"></p>
-        </form>
-        <h1>{{ msg }}</h1>
+    </div>
     </div>
 
 
 </body>
-</html>
