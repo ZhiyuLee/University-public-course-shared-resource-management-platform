@@ -39,7 +39,6 @@
         <table class="bordered" style="width: 900px;">
             <thead>
                 <tr>
-                    <th style="text-align: center">编号</th>
                     <th style="text-align: center">课程名</th>
                     <th style="text-align: center">课程类别</th>
                     <th style="text-align: center">授课教师</th>
@@ -50,7 +49,6 @@
             {% autopaginate courses 10 as thisPageCourses %}
             {% for course in thisPageCourses %}
             <tr>
-                <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.ID }}</td>
                 <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.name }}</td>
                 <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.type }}</td>
                 <td onclick="gotoDetail({{ course.ID }})" style="text-align: center">{{ course.teacherName }}</td>
