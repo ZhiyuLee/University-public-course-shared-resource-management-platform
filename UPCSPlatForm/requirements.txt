@@ -1,4 +1,4 @@
-Django==3.0.3
+Django==3.1.13
 Favorites==0.3.2
 django_recaptcha==2.0.6
 requests==2.22.0
